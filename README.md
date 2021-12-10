@@ -10,23 +10,27 @@ population structure. This package contains the following functions:
 
 1.  `PoDDyHePoFreqTable`: creates a descriptive table with sample size
     and amount of missingness in the data.
-2.  `PoDDyHePoModelSelection`: selects models for according to BIC for
-    projection step.
-3.  `PoDDyHePoPopulationDF`: uses population forecasts from Statistics
-    Finland and well-formatted survety data to create a data frame ready
-    for projection.
+2.  `PoDDyHePoModelSelection`: selects models for projection step
+    according to BIC.
+3.  `PoDDyHePoPopulationDF`: uses population forecasts, in example from
+    Statistics Finland, and well-formatted survey data to create a data
+    frame ready for projection.
 4.  `PoDDyHePoProjection`: projects individual-level values of the
-    variable using multiple imputation.
-5.  `PoDDyHePoPool`: caculates prevalences by pooling results from
+    variables using multiple imputation.
+5.  `PoDDyHePoPool`: calculates prevalences by pooling results from
     `PoDDyHePoProjection`.
 6.  `PoDDyHePoPlot`: plots the prevalences against survey year.
 
-Getting started
-===============
+Getting stated
+==============
 
-Before getting started, make sure the following package has been
-attached: `splines`.
+Before getting started, make sure that you have installed and attached
+the package. Also, remember to load the following package: `splines`.
 
+    # Install devtools if you have not.
+    install_github("zzhhatthl/PoDDyHePo-projection")
+    # After installation, please attach both PoDDyHePo-projection and splines.
+    library(PoDDyHePo-projection)
     library(splines)
 
 For all the examples, please load `testdata` (synthetic data built in
@@ -37,34 +41,48 @@ the package):
 
 In the `testdata`, we have mandatory variables:
 
--   `year`: Survey year. Numeric. 1997, 2002, 2007, 2012 and 2017.
--   `sex`: Categorical. 1 for men and 2 for women.
--   `age`: Categorical. Ranges from 25 to 64.
+-   `year`: Survey year. Numeric. 1997, 2002, 2007, 2012 and 2017. It is
+    not limited and could be any other survey years.
 
-Main variables of interest:
+-   `sex`: Categorical. 1 for men and 2 for women. Currently, the
+    function supports only 1 and 2 coding. Please ensure that the coding
+    used for `sex` is correct.
+
+-   `age`: Numeric. Ranges from 25 - 64, but not limited to this range.
+    In your case, it could be any range that you are interested in. Main
+    variables of interest:
 
 -   `obe`: Obesity/Overweight/Normal. Categorical. 0 = Normal weight, 1
     = Overweight and 2 = Obesity.
+
 -   `smo`: Smoking status. Binary. 0 = Non-smoker, 1 = Smoker.
+
 -   `highbp`: Hypertension. Binary. 0 = Non-hypertensive, 1 =
-    hypertensive.
--   `dbt`: Diabetes. Binary. 0 = Non-diabetic, 1 = diabetic.
+    Hypertensive.
+
+-   `dbt`: Diabetes. Binary. 0 = Non-diabetic, 1 = Diabetic.
+
 -   `sed`: Sedentary lifestyle. Binary. 0 = Non-sedentary lifestyle, 1 =
-    sedentary lifestyle.
+    Sedentary lifestyle.
+
 -   `highkol`: Elevated total cholesterol. Binary. 0 = Not high total
-    cholesterol, 1 = high total cholesterol.
+    cholesterol, 1 = High total cholesterol.
 
 Other background variables:
 
 -   `edulv`: Education level. Categorical. 1 = Low education level, 2 =
-    Middle education level, 3 = high education level.
+    Middle education level, 3 = High education level.
 -   `marsta`: Marital Status. Binary. 0 = Unmarried/Separated or
     Divorced/Widowed, 1 = Married/Cohabiting/Registered relationship.
 -   `area`: Categorical. 2 = North Karelia, 3 = North Savonia, 4 = Turku
     and Loimaa, 5 = Helsinki and Vantaa, 6 = Northern Ostrobothnia and
     Kainuu.
 
-Guidelines for Using the Package
+When formatting your dataset, the data types of year, sex and age should
+be numeric, factor and numeric, respectively. Other binary/categorical
+variables should be factor and continuous numeric.
+
+Guidelines for Using the package
 --------------------------------
 
 **Step 1**: If data from past surveys include missing values, they are
@@ -75,14 +93,14 @@ imputed before selecting models for projection.
 NB: `m` and `maxit` can be any number you want, but please consider the
 computational power of your workstation. Usually, `m = 10` or `m = 20`
 should be enough. And if `printFlag = T`, `mice` will print history on
-console. Here, `printFlag=F` is used for silent computation. Data set
+console. Here, `printFlag = F` is used for silent computation. Data set
 should be well-formatted like `testdata`, which means there are
 mandatory variables: year, sex and age named exactly in this way, the
-main variables of interest whose prevalences to be estimated, and
+main variables of interest whose prevalences are to be estimated, and
 possibly other background variables. Data from different years are
 merged into the same data frame.
 
-**Step 2**: Select models with PoDDyHePoModelSelection. The user can
+**Step 2**: Select models with `PoDDyHePoModelSelection`. The user can
 specify if some variables are allowed to have non-linear effects, which
 are modelled using natural splines. Some of the variables can also be
 forced (fixed) to be included in the model. Here in this example, we
@@ -91,15 +109,14 @@ variables year, sex, age and an interaction term: year:sex.
 
 In the function
 `PoDDyHePoModelSelection(imp, DV, NsVar = NULL, df = NULL, knots = NULL, b.knots = NULL, f.var = NULL)`,
-the first argument `imp` is an object of class mids from `mice()` in
-mice package (see *Step 1*). `DV` is the abbreviation of dependent
-variable. Arguments `NsVar`, `df`, `knots`, `b.knots` are for
-customizing `ns` function in the model. `NsVar` specifies a variable
-with a nature spline, if it is NULL, degrees of freedom(`df`),
-breakpoints that define the spline (`knots`) and boundary points
-(`b.knots`) are ignored; if it is not NULL, we can set df, knots and
-b.knots. Examples are given as follows based on `testdata`. More details
-about `ns` function can be found via
+the first argument `imp` is an object of class from in mice package (see
+*Step 1*). `DV` is the abbreviation of dependent variable. Arguments
+`NsVar`, `df`, `knots`, `b.knots` are for customizing `ns` function in
+the model. `NsVar` specifies a variable with a natural spline, if it is
+NULL, degrees of freedom(`df`), breakpoints that define the spline
+(`knots`) and boundary points (`b.knots`) are ignored; if it is not
+NULL, we can set df or knots and b.knots. Examples are given as follows
+based on `testdata`. More details about `ns` function can be found via
 <a href="https://www.rdocumentation.org/packages/splines/versions/3.6.2/topics/ns" class="uri">https://www.rdocumentation.org/packages/splines/versions/3.6.2/topics/ns</a>.
 
     smo <- PoDDyHePoModelSelection(imp, 
@@ -126,8 +143,9 @@ suggested model. Please notice that, the projections may be sensitive to
 the imputation models used, so it is recommended to carry out
 sensitivity analyses by trying alternative models.
 
-**Step 3**: Use population forecasts from Statistics Finland and our
-survey data (here is `testdata`) to create a data frame for projection.
+**Step 3**: Use population forecasts for example from Statistics Finland
+and your survey data (here is `testdata`) to create a data frame for
+projection.
 
     testdata2040 <- PoDDyHePoPopulationDF(testdata,
                                           file = "~path/003_139f_2040_20211102-100631.csv", 
@@ -143,8 +161,8 @@ fourth is the years to be projected. Above, 2021, 2025, 2030, 2035 and
 `y2pred = c(2021, 2025, 2030, 2035, 2040)`.
 
 In order to make this function work, the population forecast data has to
-be in a specific form. Data can be downloaded in the correct form by
-following the next steps:
+be in a specific form. In case of Finland, data can be downloaded in the
+correct form by following the next steps:
 
 1.  Visit
     <a href="https://pxnet2.stat.fi/PXWeb/pxweb/en/StatFin/StatFin__vrm__vaenn/" class="uri">https://pxnet2.stat.fi/PXWeb/pxweb/en/StatFin/StatFin__vrm__vaenn/</a>,
@@ -155,12 +173,59 @@ following the next steps:
 3.  Select Population 31 Dec (projection 2019) (Information) - WHOLE
     COUNTRY (Area) - Select the years to be projected (Year) -Select all
     (Sex) - Select all (Age), and click Show table. (In our example, it
-    is 2021, 2025, 2030, 2035 and 2040)
+    is 2021, 2025, 2030, 2035 and 2040).
 4.  Click “pivot manual” and set Area, Age in the Rows box (Order: Area,
     Age) and set Year, Sex, Information in the Columns box (Order: Year,
     Sex, Information) and click “complete”.
 5.  Click “Save the result as …” - select “Semicolon delimited with
     heading” and save.
+
+If you use population forecasts outside Finland, please format it
+correctly before putting it in the function. You can download the
+population forecasts that we used via github to see how it looks like.
+It is under extdata in the folder inst. Or by using the following
+cammands:
+
+    # Create a dataframe ready for projection, skip = 2 tell the function to skip first two rows,
+    # and by setting colClasses = c(Area="NULL"), we sikp the first column. 
+    # Those are in the csv file when we downloaded it from Statistics Finland, but we do not need.
+    population_forecasts <- utils::read.table(system.file("extdata", "003_128v_2040_20210730-015759.csv", package = "csprojections"), 
+                                              sep = ";", 
+                                              skip = 2, 
+                                              header = T, 
+                                              check.names = F,
+                                              colClasses = c(Area="NULL"))
+
+In the population forecasts, Age shoud be named exactly Age. Variable
+names like 2020 Total Population 31 Dec (projection 2019), 2020 Males
+Population 31 Dec (projection 2019) and 2020 Females Population 31 Dec
+(projection 2019) can be simplied to 2020 Total, 2020 Males and 2020
+Females. Data description is given below.
+
+    # > str(population_forecasts)
+    # 'data.frame': 102 obs. of  16 variables:
+    #  $ Age                                             : Factor w/ 102 levels "0","1","10","100 -",..: 102 1 2 14 25 36 47 58 69 80 ...
+    #  $ 2020 Total Population 31 Dec (projection 2019)  : int  5530922 45710 46123 48338 51539 54368 56932 59305 60339 61821 ...
+    #  $ 2020 Males Population 31 Dec (projection 2019)  : int  2732995 23362 23569 25015 26321 27608 29244 30328 31004 31525 ...
+    #  $ 2020 Females Population 31 Dec (projection 2019): int  2797927 22348 22554 23323 25218 26760 27688 28977 29335 30296 ...
+    #  $ 2025 Total Population 31 Dec (projection 2019)  : int  5556546 44999 45557 46066 46522 46909 47251 47588 49744 52789 ...
+    #  $ 2025 Males Population 31 Dec (projection 2019)  : int  2752594 22994 23286 23562 23774 23985 24165 24333 25721 26953 ...
+    #  $ 2025 Females Population 31 Dec (projection 2019): int  2803952 22005 22271 22504 22748 22924 23086 23255 24023 25836 ...
+    #  $ 2030 Total Population 31 Dec (projection 2019)  : int  5566685 44039 44540 45096 45592 46067 46564 47032 47451 47848 ...
+    #  $ 2030 Males Population 31 Dec (projection 2019)  : int  2763297 22507 22766 23056 23313 23546 23817 24052 24255 24465 ...
+    #  $ 2030 Females Population 31 Dec (projection 2019): int  2803388 21532 21774 22040 22279 22521 22747 22980 23196 23383 ...
+    #  $ 2035 Total Population 31 Dec (projection 2019)  : int  5556472 43670 44077 44449 44810 45222 45611 46009 46490 46908 ...
+    #  $ 2035 Males Population 31 Dec (projection 2019)  : int  2764088 22319 22531 22723 22906 23124 23326 23524 23774 23981 ...
+    #  $ 2035 Females Population 31 Dec (projection 2019): int  2792384 21351 21546 21726 21904 22098 22285 22485 22716 22927 ...
+    #  $ 2040 Total Population 31 Dec (projection 2019)  : int  5525528 43176 43729 44200 44604 44901 45239 45549 45829 46160 ...
+    #  $ 2040 Males Population 31 Dec (projection 2019)  : int  2756428 22064 22353 22595 22809 22951 23144 23294 23422 23609 ...
+    #  $ 2040 Females Population 31 Dec (projection 2019): int  2769100 21112 21376 21605 21795 21950 22095 22255 22407 22551 ...
+
+So, when formating your population forecasts, make sure you have Age and
+Total, Males, Females for each predicted year. Age do n As long as you
+have format your population forecasts which is similar to the population
+forecasts we provide, you can put it in the function. And the function
+will help you create a data frame ready for prediction.
 
 **Step 4**: Project values for the future years.
 
@@ -168,8 +233,9 @@ following the next steps:
                                                  m = 5, 
                                                  sep_col = "obe",
                                                  smo ~ ns(year, knots = c(2002), Boundary.knots = c(1997, 2017)) + 
-                                                   sex + age + edulv + sed + marsta + obe + ns(year, knots = c(2002), Boundary.knots = c(1997, 2017)):sex + age:edulv + age:marsta +
-                                                   age:obe + sex:age
+                                                   sex + age + edulv + sed + marsta + obe + 
+                                                   ns(year, knots = c(2002), Boundary.knots = c(1997, 2017)):sex + 
+                                                   age:edulv + age:marsta + age:obe + sex:age,
                                                  obe$`Suggested Model`,
                                                  dbt$`Suggested Model`,
                                                  sed$`Suggested Model`,
@@ -187,8 +253,8 @@ three or more levels, like in the testdata, `obe` has three levels: 0 =
 Normal Weight, 1 = Overweight, 2 = Obesity. By specifying
 `sep_col = "obe"`, the function calculates the proportions of each
 category. The last part is for the formulas of the imputation models. In
-*Step 2*, we found models for variables with missingness, and they are
-saved in the `Suggested Model` in the list given by
+*Step 2*, we found models for variables with missingness, and they has
+been saved in the `Suggested Model` in the list given by
 `PoDDyHePoModelSelection`. So, it can be used in a way like `obe`:
 obe$\`Suggested Model\`, or specified our own model like for `smo` in
 the code above. Every variable with missingness has to be given a
@@ -198,31 +264,15 @@ Confidence Interval in the pooling step, which is for binomial
 proportions.
 
 **Step 5**: Pool the results from the projection step and plot the
-prevalences.
+prevalences. Given Current smoking and body weight
 
-    # Smoking status
+    # Current smoking
     smopool <- PoDDyHePoPool(projection_with_knots, "smo")
-    PoDDyHePoPlot(smopool, year = 2017, "Smoking")
+    PoDDyHePoPlot(smopool, year = 2017, "Current smoking")
 
-    # Normal Weight/Overweight/Obesity
+    # Body weight
     obepool <- PoDDyHePoPool(projection_with_knots, "obe")
-    PoDDyHePoPlot(obepool, year = 2017, "Normal Weight/Overweight/Obesity", sepvarlbl = c("Normal Weight", "Overweight", "Obesity"))
-
-    # Diabetes
-    dbtpool <- PoDDyHePoPool(projection_with_knots, "dbt")
-    PoDDyHePoPlot(dbtpool, year = 2017, "Diabetes")
-
-    # Sedentary Lifestyle
-    sedpool <- PoDDyHePoPool(projection_with_knots, "sed")
-    PoDDyHePoPlot(sedpool, year = 2017, "Sedentary")
-
-    # Hypertension
-    highbppool <- PoDDyHePoPool(projection_with_knots, "highbp")
-    PoDDyHePoPlot(highbppool, year = 2017, "Hypertension")
-
-    # Elevated Total Cholesterol
-    highkolpool <- PoDDyHePoPool(projection_with_knots, "highkol")
-    PoDDyHePoPlot(highkolpool, year = 2017, "Elevated Total Cholesterol")
+    PoDDyHePoPlot(obepool, year = 2017, "Body weight", sepvarlbl = c("Normal Weight", "Overweight", "Obesity"))
 
 In the function `PoDDyHePoPool`, the first argument is the data with
 projected values from *Step 4*, and the second argument is the main
@@ -235,8 +285,8 @@ When there is a variable has three or more levels, an extra argument
 Otherwise, the labels for the newly created variables will be `obe_0`,
 `obe_1` and `obe_2`.
 
-Descriptive Table
------------------
+The function PoDDyHePoPool returns the prevalences in numerical form. It
+gives you a table with year, prevalences and prediction intervals.
 
 Descriptive table with sample size and amount of missingness is also
 available by using `PoDDyHePoFreqtable`.
@@ -247,3 +297,14 @@ interest. Examples are given below.
 
     PoDDyHePoFreqTable(testdata, colName = "smo")
     PoDDyHePoFreqTable(testdata, colName = "obe")
+
+Notice: The function creates a table for only one variable. Does not
+support several variables at one time.
+
+Acknowledgement
+===============
+
+This R code has been developed in the framework of the Projections of
+the burden of disease and disability in Finland - health policy
+prospects (PoDDy-HePo) project which was funded by the Academy of
+Finland no. 307907 (2017-2021).
