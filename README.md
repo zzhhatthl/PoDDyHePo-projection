@@ -27,7 +27,7 @@ Getting stated
 Before getting started, make sure that you have installed and attached
 the package. Also, remember to load the following package: `splines`.
 
-    # Install devtools if you have not.
+    # Install devtools if you do not have.
     install_github("zzhhatthl/PoDDyHePo-projection")
     # After installation, please attach both PoDDyHePo-projection and splines.
     library(PoDDyHePo-projection)
