@@ -7,13 +7,13 @@
 PoDDyHePoPopulationDF(data, file, size, y2pred)
 }
 \arguments{
-\item{data}{Formatted data without years that need to be projected}
+\item{data}{Well-formatted data.}
 
 \item{file}{Population forcasts from statistic Finland.}
 
 \item{size}{Size of sample to be projected}
 
-\item{y2pred}{years that needs to be projected.}
+\item{y2pred}{years that need to be projected.}
 }
 \value{
 a data frame

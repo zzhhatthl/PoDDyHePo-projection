@@ -2,18 +2,18 @@
 #' 
 #' @title Plot Function Developed for PoDDy-Hepo Project
 #'
-#' @description PoDDyHePoPlot returns a plot.
+#' @description It plots the prevalences against survey year.
 #'
-#' @details Enables plotting even there is a variable has been separated proportionally in the previous step.
+#' @details Enables plotting even there is a variable whose porprotion of each category has been calculated.
 #'
 #' @param data A data frame from PoDDyHePoPool.
-#' @param year The lastest year that existing data.
+#' @param year The maximum year in the obseved data.
 #' @param title The tile of the plot. It changes due to we will have different reponse variable.
-#' @param sepvarlbl Lable of separated variable. The default is \code{NULL}. Accoring to dummy_cols, the separated variables will be in the name for example obe_0, obe_1, obe_2,
+#' @param sepvarlbl Lable of the variable whose porprotion of each category has been calculated. The default is \code{NULL}. Accoring to dummy_cols, the separated variables will be in the name for example obe_0, obe_1, obe_2,
 #' if we taking obe for example. To label, sepvarlbl = c("Normal Weight", "Over Weight", "Obesity"). As the levels are sorted, so please make sure that the labels are in right order. 
 #'
 #'
-#' @return Returns a graph
+#' @return Returns a figure
 #' @export
 #' 
 #' @import ggplot2
@@ -62,15 +62,16 @@ PoDDyHePoPlot <- function(data, year, title, sepvarlbl = NULL){
       ggtitle(title) +
       facet_wrap( ~ Sex) +
       theme_bw() + 
-      theme(plot.title = element_text(hjust = 0.5 ,margin = margin(10, 0, 20, 0), size = 18),
-            axis.title.x = element_text(margin = margin(10, 0, 20, 0), size = 15),
-            axis.text.x = element_text(size = 11, angle = 90, vjust = 0.5),
-            axis.title.y = element_text(margin = margin(0, 10, 0, 20), size = 15),
-            axis.text.y = element_text(size = 11),
-            legend.title = element_text(size = 14),
-            legend.text = element_text(size = 14),
-            strip.text.x = element_text(size = 14),
-            strip.background = element_rect(fill = "grey90"),
+      theme(plot.title = element_text(hjust = 0.5 ,margin = margin(5, 0, 15, 0), size = 28),
+            axis.title.x = element_text(margin = margin(5, 0, 5, 0), size = 20),
+            axis.text.x = element_text(size = 14, angle = 45, vjust = 0.5),
+            axis.title.y = element_text(margin = margin(0, 5, 0, 10), size = 20),
+            axis.text.y = element_text(size = 18),
+            legend.title = element_text(size = 16),
+            legend.text = element_text(size = 20),
+            legend.margin=margin(0, 0, 0, 0),
+            strip.text.x = element_text(size = 18),
+            strip.background = element_rect(fill = "gray95", color = "black"),
             panel.border = element_rect(color = "black"),
             panel.spacing = unit(0.35, "lines"))
   } else{
@@ -99,13 +100,14 @@ PoDDyHePoPlot <- function(data, year, title, sepvarlbl = NULL){
       scale_x_continuous(breaks = unique(data$Year)) +
       theme_bw() +
       ggtitle(title) +
-      theme(plot.title = element_text(hjust = 0.5 ,margin = margin(10, 0, 20, 0), size = 18),
-            axis.title.x = element_text(margin = margin(10, 0, 20, 0), size = 15),
-            axis.text.x = element_text(size = 11),
-            axis.title.y = element_text(margin = margin(0, 10, 0, 20), size = 15),
-            axis.text.y = element_text(size = 11),
-            legend.title = element_text(size = 14),
-            legend.text = element_text(size = 14)) +
+      theme(plot.title = element_text(hjust = 0.5 ,margin = margin(5, 0, 15, 0), size = 28),
+            axis.title.x = element_text(margin = margin(5, 0, 5, 0), size = 22),
+            axis.text.x = element_text(size = 18, angle = 45, vjust = 0.5),
+            axis.title.y = element_text(margin = margin(0, 5, 0, 10), size = 22),
+            axis.text.y = element_text(size = 16),
+            legend.title = element_text(size = 16),
+            legend.text = element_text(size = 20),
+            legend.margin=margin(0, 0, 0, 0)) +
       theme(aspect.ratio = 2/3)
   }
   

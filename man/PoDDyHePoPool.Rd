@@ -2,20 +2,20 @@
 % Please edit documentation in R/PoDDyHePoPool.R
 \name{PoDDyHePoPool}
 \alias{PoDDyHePoPool}
-\title{Pool Function Developed for Pooling Means and Standard Errors from Imputed Dataset.}
+\title{Pool Function Developed for PoDDy-HePo project.}
 \usage{
 PoDDyHePoPool(imp, colName)
 }
 \arguments{
-\item{imp}{Complete data (mids object) from mice().}
+\item{imp}{Complete data (mids object) from PoDDyHePoProjeciton().}
 
-\item{colName}{A variable that you want the estimated prevalence, Confidence Interval.}
+\item{colName}{A variable whose prevalences are to be estimated.}
 }
 \value{
 Returns a data frame ready for plotting.
 }
 \description{
-PoDDyHePoPool returns a data frame which is ready for plotting.
+It calculats prevalences for variables of interest and combines the estimates from imputed data set.
 }
 \details{
 Description of PoDDyHePoPool()

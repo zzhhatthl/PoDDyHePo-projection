@@ -18,7 +18,7 @@
 #' @param df Degrees of freedom. The default is \code{df=NULL}.  
 #' @param knots Breakpoints that define the spline.
 #' @param b.knots Boundary points at which to impose the natural boundary conditions and anchor the B-spline basis (default the range of the data).
-#' @param f.var Fixed variables. Variables that would like to fix it the model (will not remove by stepwise process).
+#' @param f.var Fixed variables. Variables that would like to fix it the model (will not be removed by stepwise process).
 #'
 #' @return Returns a list with 4 elements: Models, Mean BIC, Selected Models and Suggested Model.
 #' 

@@ -1,12 +1,12 @@
 #' Description of PoDDyHePoFreqTable()
 #' @title Frequency table Function Developed for PoDDy-Hepo Project
 #'
-#' @description PoDDyHePoFreqTable returns a table arranged by Gender and Year.
+#' @description It returns a table arranged by Gender and Year.
 #'
-#' @details The table includes Total, Missing and %.
+#' @details The table includes Total, Missing amount and its proportion (%).
 #'
-#' @param data A data frame with items that need to be projected.
-#' @param colName A column that you want to have a frequency table.
+#' @param data A data frame. It could the well-formatted data, or the data frame whose prevalences are to be estimated.
+#' @param colName A column that you want to creat a frequency table for.
 #'
 #'
 #' @return a table

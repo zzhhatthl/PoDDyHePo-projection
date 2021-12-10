@@ -7,23 +7,23 @@
 PoDDyHePoProjection(data, m = 5, sep_col = NULL, ...)
 }
 \arguments{
-\item{data}{A data frame with items that need to be projected.}
+\item{data}{A well-formatted data set ready for projection.}
 
 \item{m}{Number of multiple imputations. The default is \code{m=5}}
 
 \item{sep_col}{A variable (usually has 3 levels or more) to be seperated.}
 
-\item{...}{Formulas. Formulas}
+\item{...}{Formulas. Formulas.}
 }
 \value{
 Returns an S3 object of class \code{\link[=mids-class]{mids}}
        (multiply imputed data set)
 }
 \description{
-PoDDyHePoProjection is the main body for projection.
+PoDDyHePoProjection is the main body for projection. It projects projects individual-level values of the variables using multiple imputation.
 }
 \details{
 Description of PoDDyHePoProjection()
 
-It allows people to set up a variable that to be separated and returns a \code{\link[=mids-class]{mids}} obeject.
+It allows people to set up a variable whose proportion of each category needs to be calculated and returns a \code{\link[=mids-class]{mids}} obeject.
 }

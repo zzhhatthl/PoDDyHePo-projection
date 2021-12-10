@@ -7,18 +7,18 @@
 PoDDyHePoFreqTable(data, colName)
 }
 \arguments{
-\item{data}{A data frame with items that need to be projected.}
+\item{data}{A data frame. It could the well-formatted data, or the data frame whose prevalences are to be estimated.}
 
-\item{colName}{A column that you want to have a frequency table.}
+\item{colName}{A column that you want to creat a frequency table for.}
 }
 \value{
 a table
 }
 \description{
-PoDDyHePoFreqTable returns a table arranged by Gender and Year.
+It returns a table arranged by Gender and Year.
 }
 \details{
 Description of PoDDyHePoFreqTable()
 
-The table includes Total, Missing and %.
+The table includes Total, Missing amount and its proportion (%).
 }

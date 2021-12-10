@@ -6,10 +6,10 @@
 #'
 #' @details 
 #'
-#' @param data Formatted data without years that need to be projected
+#' @param data Well-formatted data. 
 #' @param file Population forcasts from statistic Finland.
 #' @param size Size of sample to be projected
-#' @param y2pred years that needs to be projected.
+#' @param y2pred years that need to be projected.
 #'
 #'
 #' @return a data frame
@@ -23,24 +23,24 @@
 PoDDyHePoPopulationDF <- function(data, file, size, y2pred){
   
   # read in data from statistic Finland 
-  population <- utils::read.table(file, sep = ";", skip = 2, header = T, check.names = F)
+  population <- utils::read.table(file, sep = ";", skip = 2, header = T, check.names = F, colClasses = c(Area="NULL"))
   
   # Get total amount from the data
-  total <- population[-1, ] %>%
+  total <- population %>%
     select(grep(".*Total|Age", names(population), value = F)) %>%
     mutate(Age = as.numeric(get("Age"))) %>%
     subset(get("Age") >= range(data$age)[1] & get("Age") <= range(data$age)[2]) %>%
     arrange(get("Age"))
 
   # Get predicted amount for men
-  male <- population[-1, ] %>%
+  male <- population %>%
     select(grep(".*Males|Age", names(population), value = F)) %>%
     mutate(Age = as.numeric(get("Age"))) %>%
     subset(get("Age") >= range(data$age)[1] & get("Age") <= range(data$age)[2]) %>%
     arrange(get("Age"))
 
   # Get prdicted amount for women
-  female <- population[-1, ] %>%
+  female <- population %>%
     select(grep(".*Females|Age", names(population), value = F)) %>%
     mutate(Age = as.numeric(get("Age"))) %>%
     subset(get("Age") >= range(data$age)[1] & get("Age") <= range(data$age)[2]) %>%

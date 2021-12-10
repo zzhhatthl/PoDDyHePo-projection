@@ -1,12 +1,12 @@
 #' Description of PoDDyHePoPool()
-#' @title Pool Function Developed for Pooling Means and Standard Errors from Imputed Dataset.
+#' @title Pool Function Developed for PoDDy-HePo project.
 #'
-#' @description PoDDyHePoPool returns a data frame which is ready for plotting.
+#' @description It calculats prevalences for variables of interest and combines the estimates from imputed data set.
 #'
 #' @details It is able to detect separated variable and returns a data frame with Year, Sex, estimated prevalence (EST), CI_LOWER and CI_UPPER.
 #'
-#' @param imp Complete data (mids object) from mice(). 
-#' @param colName A variable that you want the estimated prevalence, Confidence Interval.
+#' @param imp Complete data (mids object) from PoDDyHePoProjeciton(). 
+#' @param colName A variable whose prevalences are to be estimated.
 #'
 #'
 #' @return Returns a data frame ready for plotting.
