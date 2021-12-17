@@ -185,7 +185,7 @@ If you use population forecasts outside Finland, please format it
 correctly before putting it in the function. You can download the
 population forecasts that we used via github to see how it looks like.
 It is under extdata in the folder inst. Or by using the following
-cammands:
+commands:
 
     # Create a dataframe ready for projection, skip = 2 tell the function to skip first two rows,
     # and by setting colClasses = c(Area="NULL"), we sikp the first column. 
@@ -197,10 +197,10 @@ cammands:
                                               check.names = F,
                                               colClasses = c(Area="NULL"))
 
-In the population forecasts, Age shoud be named exactly Age. Variable
+In the population forecasts, Age should be named exactly Age. Variable
 names like 2020 Total Population 31 Dec (projection 2019), 2020 Males
 Population 31 Dec (projection 2019) and 2020 Females Population 31 Dec
-(projection 2019) can be simplied to 2020 Total, 2020 Males and 2020
+(projection 2019) can be simplified to 2020 Total, 2020 Males and 2020
 Females. Data description is given below.
 
     # > str(population_forecasts)
@@ -222,9 +222,9 @@ Females. Data description is given below.
     #  $ 2040 Males Population 31 Dec (projection 2019)  : int  2756428 22064 22353 22595 22809 22951 23144 23294 23422 23609 ...
     #  $ 2040 Females Population 31 Dec (projection 2019): int  2769100 21112 21376 21605 21795 21950 22095 22255 22407 22551 ...
 
-So, when formating your population forecasts, make sure you have Age and
-Total, Males, Females for each predicted year. Age do n As long as you
-have format your population forecasts which is similar to the population
+So, when formatting your population forecasts, make sure you have Age
+and Total, Males, Females for each predicted year. As long as you have
+formatted your population forecasts which is similar to the population
 forecasts we provide, you can put it in the function. And the function
 will help you create a data frame ready for prediction.
 
@@ -254,7 +254,7 @@ three or more levels, like in the testdata, `obe` has three levels: 0 =
 Normal Weight, 1 = Overweight, 2 = Obesity. By specifying
 `sep_col = "obe"`, the function calculates the proportions of each
 category. The last part is for the formulas of the imputation models. In
-*Step 2*, we found models for variables with missingness, and they has
+*Step 2*, we found models for variables with missingness, and they have
 been saved in the `Suggested Model` in the list given by
 `PoDDyHePoModelSelection`. So, it can be used in a way like `obe`:
 obe$\`Suggested Model\`, or specified our own model like for `smo` in

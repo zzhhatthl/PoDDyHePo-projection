@@ -123,7 +123,7 @@ In order to make this function work, the population forecast data has to be in a
 4. Click "pivot manual" and set Area, Age in the Rows box (Order: Area, Age) and set Year, Sex, Information in the Columns box (Order: Year, Sex, Information) and click "complete".
 5. Click "Save the result as ..." - select "Semicolon delimited with heading" and save.
 
-If you use population forecasts outside Finland, please format it correctly before putting it in the function. You can download the population forecasts that we used via github to see how it looks like. It is under extdata in the folder inst. Or by using the following cammands:
+If you use population forecasts outside Finland, please format it correctly before putting it in the function. You can download the population forecasts that we used via github to see how it looks like. It is under extdata in the folder inst. Or by using the following commands:
 
 ```{r load_population_forecasts, warning=F, error=F, message=F, eval=F}
 # Create a dataframe ready for projection, skip = 2 tell the function to skip first two rows,
@@ -138,7 +138,7 @@ population_forecasts <- utils::read.table(system.file("extdata", "003_128v_2040_
 
 ```
 
-In the population forecasts, Age shoud be named exactly Age. Variable names like 2020 Total Population 31 Dec (projection 2019), 2020 Males Population 31 Dec (projection 2019) and 2020 Females Population 31 Dec (projection 2019) can be simplied to 2020 Total, 2020 Males and 2020 Females. Data description is given below.
+In the population forecasts, Age should be named exactly Age. Variable names like 2020 Total Population 31 Dec (projection 2019), 2020 Males Population 31 Dec (projection 2019) and 2020 Females Population 31 Dec (projection 2019) can be simplified to 2020 Total, 2020 Males and 2020 Females. Data description is given below.
 
 ```{r format_correction, warning=F, error=F, message=F, eval=F}
 # > str(population_forecasts)
@@ -161,7 +161,7 @@ In the population forecasts, Age shoud be named exactly Age. Variable names like
 #  $ 2040 Females Population 31 Dec (projection 2019): int  2769100 21112 21376 21605 21795 21950 22095 22255 22407 22551 ...
 ```
 
-So, when formating your population forecasts, make sure you have Age and Total, Males, Females for each predicted year. Age do n As long as you have format your population forecasts which is similar to the population forecasts we provide, you can put it in the function. And the function will help you create a data frame ready for prediction.
+So, when formatting your population forecasts, make sure you have Age and Total, Males, Females for each predicted year. As long as you have formatted your population forecasts which is similar to the population forecasts we provide, you can put it in the function. And the function will help you create a data frame ready for prediction.
   
 **Step 4**: Project values for the future years.
 
@@ -184,7 +184,7 @@ projection_with_knots <- PoDDyHePoProjection(testdata2040,
 
 ```
 
-In the `PoDDyHePoProjection` function, the first argument is the data set from *Step 3*. The second argument is the number of multiple imputations, by default this is 5, but much greater value is usually needed in practice. The third argument is a categorical variable with three or more levels, like in the testdata, `obe` has three levels: 0 = Normal Weight, 1 = Overweight, 2 = Obesity. By specifying `sep_col = "obe"`, the function calculates the proportions of each category. The last part is for the formulas of the imputation models. In *Step 2*, we found models for variables with missingness, and they has been saved in the `Suggested Model` in the list given by `PoDDyHePoModelSelection`. So, it can be used in a way like `obe`: obe$\`Suggested Model\`, or specified our own model like for `smo` in the code above. Every variable with missingness has to be given a formula. When there is a variable with 3 or more levels like `obe` in the example, it has to be specified in `sep_col`, as we use Wilson Confidence Interval in the pooling step, which is for binomial proportions. 
+In the `PoDDyHePoProjection` function, the first argument is the data set from *Step 3*. The second argument is the number of multiple imputations, by default this is 5, but much greater value is usually needed in practice. The third argument is a categorical variable with three or more levels, like in the testdata, `obe` has three levels: 0 = Normal Weight, 1 = Overweight, 2 = Obesity. By specifying `sep_col = "obe"`, the function calculates the proportions of each category. The last part is for the formulas of the imputation models. In *Step 2*, we found models for variables with missingness, and they have been saved in the `Suggested Model` in the list given by `PoDDyHePoModelSelection`. So, it can be used in a way like `obe`: obe$\`Suggested Model\`, or specified our own model like for `smo` in the code above. Every variable with missingness has to be given a formula. When there is a variable with 3 or more levels like `obe` in the example, it has to be specified in `sep_col`, as we use Wilson Confidence Interval in the pooling step, which is for binomial proportions. 
 
 **Step 5**: Pool the results from the projection step and plot the prevalences. Given Current smoking and body weight
 
