@@ -28,21 +28,21 @@ PoDDyHePoPopulationDF <- function(data, file, size, y2pred){
   # Get total amount from the data
   total <- population %>%
     select(grep(".*Total|Age", names(population), value = F)) %>%
-    mutate(Age = as.numeric(get("Age"))) %>%
+    mutate(Age = suppressWarnings(as.numeric(get("Age")))) %>%
     subset(get("Age") >= range(data$age)[1] & get("Age") <= range(data$age)[2]) %>%
     arrange(get("Age"))
 
   # Get predicted amount for men
   male <- population %>%
     select(grep(".*Males|Age", names(population), value = F)) %>%
-    mutate(Age = as.numeric(get("Age"))) %>%
+    mutate(Age = suppressWarnings(as.numeric(get("Age")))) %>%
     subset(get("Age") >= range(data$age)[1] & get("Age") <= range(data$age)[2]) %>%
     arrange(get("Age"))
 
   # Get prdicted amount for women
   female <- population %>%
     select(grep(".*Females|Age", names(population), value = F)) %>%
-    mutate(Age = as.numeric(get("Age"))) %>%
+    mutate(Age = suppressWarnings(as.numeric(get("Age")))) %>%
     subset(get("Age") >= range(data$age)[1] & get("Age") <= range(data$age)[2]) %>%
     arrange(get("Age"))
   
