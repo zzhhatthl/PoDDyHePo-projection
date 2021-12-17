@@ -30,13 +30,12 @@ the package. Also, remember to load the following package: `splines`.
     # Install devtools if you do not have.
     install_github("zzhhatthl/PoDDyHePo-projection")
     # After installation, please attach both PoDDyHePo-projection and splines.
-    library(PoDDyHePo-projection)
+    library(csprojections)
     library(splines)
 
 For all the examples, please load `testdata` (synthetic data built in
 the package):
 
-    library(csprojections)
     data(testdata)
 
 In the `testdata`, we have mandatory variables:
@@ -158,7 +157,9 @@ which is “file”, is a csv file downloaded from Statistics Finland (with
 special requirements given below). The third is a sample size and the
 fourth is the years to be projected. Above, 2021, 2025, 2030, 2035 and
 2040, are the years to be projected, so
-`y2pred = c(2021, 2025, 2030, 2035, 2040)`.
+`y2pred = c(2021, 2025, 2030, 2035, 2040)`. If you want to try our
+interrnal population forecasts, use
+`file = system.file("extdata", "003_128v_2040_20210730-015759.csv", package = "csprojections")`.
 
 In order to make this function work, the population forecast data has to
 be in a specific form. In case of Finland, data can be downloaded in the
