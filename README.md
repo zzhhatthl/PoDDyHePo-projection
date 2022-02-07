@@ -250,20 +250,15 @@ will help you create a data frame ready for prediction.
 In the `PoDDyHePoProjection` function, the first argument is the data
 set from *Step 3*. The second argument is the number of multiple
 imputations, by default this is 5, but much greater value is usually
-needed in practice. The third argument is a categorical variable with
-three or more levels, like in the testdata, `obe` has three levels: 0 =
-Normal Weight, 1 = Overweight, 2 = Obesity. By specifying
-`sep_col = "obe"`, the function calculates the proportions of each
-category. The last part is for the formulas of the imputation models. In
-*Step 2*, we found models for variables with missingness, and they have
-been saved in the `Suggested Model` in the list given by
-`PoDDyHePoModelSelection`. So, it can be used in a way like `obe`:
-obe$\`Suggested Model\`, or specified our own model like for `smo` in
-the code above. Every variable with missingness has to be given a
-formula. When there is a variable with 3 or more levels like `obe` in
-the example, it has to be specified in `sep_col`, as we use Wilson
-Confidence Interval in the pooling step, which is for binomial
-proportions.
+needed in practice. The third argument `maxit` is a scalar giving the
+number of iterations. If the forth argument `printFlag` is `FALSE`,
+`mice` will not print histroy on console. The last part is for the
+formulas of the imputation models. In *Step 2*, we found models for
+variables with missingness, and they have been saved in the
+`Suggested Model` in the list given by `PoDDyHePoModelSelection`. So, it
+can be used in a way like `obe`: obe$\`Suggested Model\`, or specified
+our own model like for `smo` in the code above. Every variable with
+missingness has to be given a formula.
 
 **Step 5**: Pool the results from the projection step and plot the
 prevalences. Given Current smoking and body weight
@@ -278,16 +273,23 @@ prevalences. Given Current smoking and body weight
 
 In the function `PoDDyHePoPool`, the first argument is the data with
 projected values from *Step 4*, and the second argument is the main
-variable whose prevalences we aim to estimate. The third, `sep_col`, is
-the variable whose proportion needs to be calculated. In the function
-`PoDDyHePoPlot`, the first argument is the result from `PoDDyHePoPool`;
-the second argument is the maximum year in the observed data (In
-`testdata`, it is 2017), the third argument is the title for the figure.
-Arguments `y_min`, `y_max` are for setting the range of y-axis. When
-there is a variable has three or more levels, an extra argument
-`sepvarlbl` is available, which is to label the levels of this variable.
-Otherwise, the labels for the newly created variables will be `obe_0`,
-`obe_1` and `obe_2`.
+variable whose prevalences we aim to estimate. The third argument is a
+categorical variable with three or more levels, like in the testdata,
+`obe` has three levels: 0 = Normal Weight, 1 = Overweight, 2 = Obesity.
+By specifying `sep_col = "obe"`, the function calculates the proportions
+of each category. It has to be specified in `sep_col`, when there is a
+variable with 3 or more levels like `obe` in the example, as we use
+Wilson Confidence Interval in the pooling step, which is for binomial
+proportions.
+
+In the function `PoDDyHePoPlot`, the first argument is the result from
+`PoDDyHePoPool`; the second argument is the maximum year in the observed
+data (In `testdata`, it is 2017), the third argument is the title for
+the figure. Arguments `y_min`, `y_max` are for setting the range of
+y-axis. When there is a variable has three or more levels, an extra
+argument `sepvarlbl` is available, which is to label the levels of this
+variable. Otherwise, the labels for the newly created variables will be
+`obe_0`, `obe_1` and `obe_2`.
 
 NB: Due the limitation of point type, `PoDDyHePoPlot` function does not
 support variable with more than five levels.
