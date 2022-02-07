@@ -267,7 +267,7 @@ prevalences. Given Current smoking and body weight
     smopool <- PoDDyHePoPool(projection_with_knots, "smo", sep_col = NULL)
     PoDDyHePoPlot(smopool, year = 2017, title = "Current smoking", y_min = 0, y_max = 40)
 
-    # Body weight
+    # BMI categories
     obepool <- PoDDyHePoPool(projection_with_knots, "obe", sep_col = "obe")
     PoDDyHePoPlot(obepool, year = 2017, title = "BMI categories", y_min = 0, y_max = 75, sepvarlbl = c("Normal Weight", "Overweight", "Obesity"))
 
@@ -282,6 +282,9 @@ variable with 3 or more levels like `obe` in the example, as we use
 Wilson Confidence Interval in the pooling step, which is for binomial
 proportions.
 
+The function `PoDDyHePoPool` returns the prevalences in numerical form.
+It gives you a table with year, prevalences and prediction intervals.
+
 In the function `PoDDyHePoPlot`, the first argument is the result from
 `PoDDyHePoPool`; the second argument is the maximum year in the observed
 data (In `testdata`, it is 2017), the third argument is the title for
@@ -293,9 +296,6 @@ variable. Otherwise, the labels for the newly created variables will be
 
 NB: Due the limitation of point type, `PoDDyHePoPlot` function does not
 support variable with more than five levels.
-
-The function PoDDyHePoPool returns the prevalences in numerical form. It
-gives you a table with year, prevalences and prediction intervals.
 
 Descriptive table with sample size and amount of missingness is also
 available by using `PoDDyHePoFreqtable`.
