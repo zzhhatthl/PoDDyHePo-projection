@@ -232,7 +232,8 @@ will help you create a data frame ready for prediction.
 
     projection_with_knots <- PoDDyHePoProjection(testdata2040, 
                                                  m = 5, 
-                                                 sep_col = "obe",
+                                                 maxit = 10,
+                                                 printFlag = F,
                                                  smo ~ ns(year, knots = c(2002), Boundary.knots = c(1997, 2017)) + 
                                                    sex + age + edulv + sed + marsta + obe + 
                                                    ns(year, knots = c(2002), Boundary.knots = c(1997, 2017)):sex + 
@@ -268,23 +269,28 @@ proportions.
 prevalences. Given Current smoking and body weight
 
     # Current smoking
-    smopool <- PoDDyHePoPool(projection_with_knots, "smo")
-    PoDDyHePoPlot(smopool, year = 2017, "Current smoking")
+    smopool <- PoDDyHePoPool(projection_with_knots, "smo", sep_col = NULL)
+    PoDDyHePoPlot(smopool, year = 2017, title = "Current smoking", y_min = 0, y_max = 40)
 
     # Body weight
-    obepool <- PoDDyHePoPool(projection_with_knots, "obe")
-    PoDDyHePoPlot(obepool, year = 2017, "Body weight", sepvarlbl = c("Normal Weight", "Overweight", "Obesity"))
+    obepool <- PoDDyHePoPool(projection_with_knots, "obe", sep_col = "obe")
+    PoDDyHePoPlot(obepool, year = 2017, title = "BMI categories", y_min = 0, y_max = 75, sepvarlbl = c("Normal Weight", "Overweight", "Obesity"))
 
 In the function `PoDDyHePoPool`, the first argument is the data with
 projected values from *Step 4*, and the second argument is the main
-variable whose prevalences we aim to estimate. In the function
+variable whose prevalences we aim to estimate. The third, `sep_col`, is
+the variable whose proportion needs to be calculated. In the function
 `PoDDyHePoPlot`, the first argument is the result from `PoDDyHePoPool`;
 the second argument is the maximum year in the observed data (In
 `testdata`, it is 2017), the third argument is the title for the figure.
-When there is a variable has three or more levels, an extra argument
+Arguments `y_min`, `y_max` are for setting the range of y-axis. When
+there is a variable has three or more levels, an extra argument
 `sepvarlbl` is available, which is to label the levels of this variable.
 Otherwise, the labels for the newly created variables will be `obe_0`,
 `obe_1` and `obe_2`.
+
+NB: Due the limitation of point type, `PoDDyHePoPlot` function does not
+support variable with more than five levels.
 
 The function PoDDyHePoPool returns the prevalences in numerical form. It
 gives you a table with year, prevalences and prediction intervals.
