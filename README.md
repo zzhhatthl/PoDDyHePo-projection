@@ -51,8 +51,9 @@ In the `testdata`, we have mandatory variables:
     In your case, it could be any range that you are interested in. Main
     variables of interest:
 
--   `obe`: Obesity/Overweight/Normal. Categorical. 0 = Normal weight, 1
-    = Overweight and 2 = Obesity.
+-   `obe`: BMI categories, including: obesity, overweight and normal
+    weight. Categorical. 0 = Normal weight, 1 = Overweight and 2 =
+    Obesity.
 
 -   `smo`: Smoking status. Binary. 0 = Non-smoker, 1 = Smoker.
 

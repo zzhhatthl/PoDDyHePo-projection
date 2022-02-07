@@ -51,7 +51,7 @@ In the `testdata`, we have mandatory variables:
  * `age`: Numeric. Ranges from 25 - 64, but not limited to this range. In your case, it could be any range that you are interested in. 
 Main variables of interest: 
 
- * `obe`: Obesity/Overweight/Normal. Categorical. 0 = Normal weight, 1 = Overweight and 2 = Obesity.
+ * `obe`: BMI categories, including: obesity, overweight and normal weight. Categorical. 0 = Normal weight, 1 = Overweight and 2 = Obesity.
  * `smo`: Smoking status. Binary. 0 = Non-smoker, 1 = Smoker.
  * `highbp`: Hypertension. Binary. 0 = Non-hypertensive, 1 = Hypertensive.
  * `dbt`: Diabetes. Binary. 0 = Non-diabetic, 1 = Diabetic.
