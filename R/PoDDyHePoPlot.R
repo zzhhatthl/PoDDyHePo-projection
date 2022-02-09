@@ -9,10 +9,9 @@
 #' @param data A data frame from PoDDyHePoPool.
 #' @param year The maximum year in the obseved data.
 #' @param title The tile of the plot. It changes due to we will have different reponse variable.
-#' @param y_min minimum value of y-axis(in %). For example, if 10% is the minimum value of y-axis, then type let y_min = 10.
-#' @param y_max maximum value of y-axis(in %). Let y_max = 75, if 75% is the maximun value of y-axis.
-#' @param sepvarlbl Lable of the variable whose porprotion of each category has been calculated. The default is \code{NULL}. Accoring to dummy_cols, the separated variables will be in the name for example obe_0, obe_1, obe_2,
-#' if we taking obe for example. To label, sepvarlbl = c("Normal Weight", "Over Weight", "Obesity"). As the levels are sorted, so please make sure that the labels are in right order. 
+#' @param y_min minimum value of y-axis(in percentage). For example, if 10 percent is the minimum value of y-axis, then type let y_min = 10.
+#' @param y_max maximum value of y-axis(in percentage). Let y_max = 75, if 75 percent is the maximun value of y-axis.
+#' @param sepvarlbl Lable of the variable whose porprotion of each category has been calculated. The default is \code{NULL}. Accoring to dummy_cols, the separated variables will be in the name for example obe_0, obe_1, obe_2, if we taking obe for example. To label, sepvarlbl = c("Normal Weight", "Over Weight", "Obesity"). As the levels are sorted, so please make sure that the labels are in right order. 
 #'
 #'
 #' @return Returns a figure
