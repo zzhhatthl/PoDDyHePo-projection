@@ -51,7 +51,7 @@ In the `testdata`, we have mandatory variables:
     In your case, it could be any range that you are interested in. Main
     variables of interest:
 
--   `obe`: BMI categories, including: obesity, overweight and normal
+-   `obe`: BMI categories, including obesity, overweight and normal
     weight. Categorical. 0 = Normal weight, 1 = Overweight and 2 =
     Obesity.
 
@@ -252,8 +252,8 @@ In the `PoDDyHePoProjection` function, the first argument is the data
 set from *Step 3*. The second argument is the number of multiple
 imputations, by default this is 5, but much greater value is usually
 needed in practice. The third argument `maxit` is a scalar giving the
-number of iterations. If the forth argument `printFlag` is `FALSE`,
-`mice` will not print histroy on console. The last part is for the
+number of iterations. If the fourth argument `printFlag` is `FALSE`,
+`mice` will not print history on console. The last part is for the
 formulas of the imputation models. In *Step 2*, we found models for
 variables with missingness, and they have been saved in the
 `Suggested Model` in the list given by `PoDDyHePoModelSelection`. So, it

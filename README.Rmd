@@ -51,7 +51,7 @@ In the `testdata`, we have mandatory variables:
  * `age`: Numeric. Ranges from 25 - 64, but not limited to this range. In your case, it could be any range that you are interested in. 
 Main variables of interest: 
 
- * `obe`: BMI categories, including: obesity, overweight and normal weight. Categorical. 0 = Normal weight, 1 = Overweight and 2 = Obesity.
+ * `obe`: BMI categories, including obesity, overweight and normal weight. Categorical. 0 = Normal weight, 1 = Overweight and 2 = Obesity.
  * `smo`: Smoking status. Binary. 0 = Non-smoker, 1 = Smoker.
  * `highbp`: Hypertension. Binary. 0 = Non-hypertensive, 1 = Hypertensive.
  * `dbt`: Diabetes. Binary. 0 = Non-diabetic, 1 = Diabetic.
@@ -185,7 +185,7 @@ projection_with_knots <- PoDDyHePoProjection(testdata2040,
 
 ```
 
-In the `PoDDyHePoProjection` function, the first argument is the data set from *Step 3*. The second argument is the number of multiple imputations, by default this is 5, but much greater value is usually needed in practice. The third argument `maxit` is a scalar giving the number of iterations. If the forth argument `printFlag` is `FALSE`, `mice` will not print histroy on console. The last part is for the formulas of the imputation models. In *Step 2*, we found models for variables with missingness, and they have been saved in the `Suggested Model` in the list given by `PoDDyHePoModelSelection`. So, it can be used in a way like `obe`: obe$\`Suggested Model\`, or specified our own model like for `smo` in the code above. Every variable with missingness has to be given a formula. 
+In the `PoDDyHePoProjection` function, the first argument is the data set from *Step 3*. The second argument is the number of multiple imputations, by default this is 5, but much greater value is usually needed in practice. The third argument `maxit` is a scalar giving the number of iterations. If the fourth argument `printFlag` is `FALSE`, `mice` will not print history on console. The last part is for the formulas of the imputation models. In *Step 2*, we found models for variables with missingness, and they have been saved in the `Suggested Model` in the list given by `PoDDyHePoModelSelection`. So, it can be used in a way like `obe`: obe$\`Suggested Model\`, or specified our own model like for `smo` in the code above. Every variable with missingness has to be given a formula. 
 
 **Step 5**: Pool the results from the projection step and plot the prevalences. Given Current smoking and body weight
 
