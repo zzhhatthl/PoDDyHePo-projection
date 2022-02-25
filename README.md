@@ -107,16 +107,20 @@ forced (fixed) to be included in the model. Here in this example, we
 define knots and boundary knots in the spline function `ns`, and fix
 variables year, sex, age and an interaction term: year:sex.
 
-In the function
-`PoDDyHePoModelSelection(imp, DV, NsVar = NULL, df = NULL, knots = NULL, b.knots = NULL, f.var = NULL)`,
-the first argument `imp` is an object of class from in mice package (see
-*Step 1*). `DV` is the abbreviation of dependent variable. Arguments
-`NsVar`, `df`, `knots`, `b.knots` are for customizing `ns` function in
-the model. `NsVar` specifies a variable with a natural spline, if it is
-NULL, degrees of freedom(`df`), breakpoints that define the spline
-(`knots`) and boundary points (`b.knots`) are ignored; if it is not
-NULL, we can set df or knots and b.knots. Examples are given as follows
-based on `testdata`. More details about `ns` function can be found via
+In the function PoDDyHePoModelSelection(imp, DV, NsVar = NULL, df =
+NULL, knots = NULL, b.knots = NULL, f.var = NULL), the first argument
+imp is an object of class from in mice package (see Step 1).
+
+-   DV is the abbreviation of dependent variable.
+-   Arguments NsVar, df, knots, b.knots are for customizing ns function
+    in the model.
+    -   NsVar specifies a variable with a natural spline, if it is NULL,
+    -   degrees of freedom(df),
+    -   breakpoints that define the spline (knots) and boundary points
+        (b.knots) are ignored; if it is not NULL, we can set df or knots
+        and b.knots. Examples are given as follows based on testdata.
+
+More details about `ns` function can be found via
 <a href="https://www.rdocumentation.org/packages/splines/versions/3.6.2/topics/ns" class="uri">https://www.rdocumentation.org/packages/splines/versions/3.6.2/topics/ns</a>.
 
     smo <- PoDDyHePoModelSelection(imp, 
