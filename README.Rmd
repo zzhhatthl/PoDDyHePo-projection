@@ -172,7 +172,7 @@ Basic information (sturcture, data types and summary) of testdata2040 are given 
 In the function `PoDDyHePoPopulationDF`, 
 
  * `data` is the well-formatted data, in the example `testdata`. 
- * `file`, is a csv file downloaded from Statistics Finland (with special requirements given below). 
+ * `file` is a csv file downloaded from Statistics Finland (with special requirements given below). 
  * `size` is a sample size.
  * and `y2pred` is the years to be projected. Above, 2021, 2025, 2030, 2035 and 2040, are the years to be projected, so `y2pred = c(2021, 2025, 2030, 2035, 2040)`. 
  
@@ -250,8 +250,8 @@ projection_with_knots <- PoDDyHePoProjection(testdata2040,
 
 In the `PoDDyHePoProjection` function, 
 
- * `data`, the first argument,  is the data set from *Step 3*. 
- * Second argument, `m`, is the number of multiple imputations, by default this is 5, but much greater value is usually needed in practice. 
+ * `data` the first argument,  is the data set from *Step 3*. 
+ * `m` is the number of multiple imputations, by default this is 5, but much greater value is usually needed in practice. 
  * `maxit` is a scalar giving the number of iterations. 
  * `printFlag` is `FALSE`, `mice` will not print history on console. 
  * The last part is for the formulas of the imputation models. In *Step 2*, we found models for variables with missingness, and they have been saved in the `Suggested Model` in the list given by `PoDDyHePoModelSelection`. So, it can be used in a way like `obe`: obe$\`Suggested Model\`, or specified our own model like for `smo` in the code above. Every variable with missingness has to be given a formula. 
@@ -270,13 +270,13 @@ PoDDyHePoPlot(obepool, year = 2017, title = "BMI categories", y_min = 0, y_max =
 
 In the function `PoDDyHePoPool`, 
 
- * the first argument, `imp`, is the imputed data set from *Step 4*, 
+ * `imp`, is the imputed data set from *Step 4*, 
  * `colName` is the main variable whose prevalences we aim to estimate. 
  * `sep_col` is a categorical variable with three or more levels, like in the testdata, `obe` has three levels: 0 = Normal Weight, 1 = Overweight, 2 = Obesity. By specifying `sep_col = "obe"`, the function calculates the proportions of each category. It has to be specified in `sep_col`, when there is a variable with 3 or more levels like `obe` in the example, as we use Wilson Confidence Interval in the pooling step, which is for binomial proportions. This function returns the prevalences in numerical form. It gives you a table with year, prevalences and prediction intervals.
 
 In the function `PoDDyHePoPlot`, 
 
- * argurement `data` is the result from `PoDDyHePoPool`; 
+ * `data` is the result from `PoDDyHePoPool`; 
  * `year` is the maximum year in the observed data (In `testdata`, it is 2017), 
  * `title` is the title for the figure. 
  * Arguments `y_min`, `y_max` are for setting the range of y-axis. 

@@ -208,7 +208,7 @@ are given below.
 In the function `PoDDyHePoPopulationDF`,
 
 -   `data` is the well-formatted data, in the example `testdata`.
--   `file`, is a csv file downloaded from Statistics Finland (with
+-   `file` is a csv file downloaded from Statistics Finland (with
     special requirements given below).
 -   `size` is a sample size.
 -   and `y2pred` is the years to be projected. Above, 2021, 2025, 2030,
@@ -306,10 +306,9 @@ will help you create a data frame ready for prediction.
 
 In the `PoDDyHePoProjection` function,
 
--   `data`, the first argument, is the data set from *Step 3*.
--   Second argument, `m`, is the number of multiple imputations, by
-    default this is 5, but much greater value is usually needed in
-    practice.
+-   `data` the first argument, is the data set from *Step 3*.
+-   `m` is the number of multiple imputations, by default this is 5, but
+    much greater value is usually needed in practice.
 -   `maxit` is a scalar giving the number of iterations.
 -   `printFlag` is `FALSE`, `mice` will not print history on console.
 -   The last part is for the formulas of the imputation models. In *Step
@@ -333,7 +332,7 @@ prevalences. Given Current smoking and body weight
 
 In the function `PoDDyHePoPool`,
 
--   the first argument, `imp`, is the imputed data set from *Step 4*,
+-   `imp`, is the imputed data set from *Step 4*,
 -   `colName` is the main variable whose prevalences we aim to estimate.
 -   `sep_col` is a categorical variable with three or more levels, like
     in the testdata, `obe` has three levels: 0 = Normal Weight, 1 =
@@ -347,7 +346,7 @@ In the function `PoDDyHePoPool`,
 
 In the function `PoDDyHePoPlot`,
 
--   argurement `data` is the result from `PoDDyHePoPool`;
+-   `data` is the result from `PoDDyHePoPool`;
 -   `year` is the maximum year in the observed data (In `testdata`, it
     is 2017),
 -   `title` is the title for the figure.
