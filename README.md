@@ -332,7 +332,7 @@ prevalences. Given Current smoking and body weight
 
 In the function `PoDDyHePoPool`,
 
--   `imp`, is the imputed data set from *Step 4*,
+-   `imp`, is the imputed data set from *Step 4*.
 -   `colName` is the main variable whose prevalences we aim to estimate.
 -   `sep_col` is a categorical variable with three or more levels, like
     in the testdata, `obe` has three levels: 0 = Normal Weight, 1 =
@@ -346,9 +346,9 @@ In the function `PoDDyHePoPool`,
 
 In the function `PoDDyHePoPlot`,
 
--   `data` is the result from `PoDDyHePoPool`;
+-   `data` is the result from `PoDDyHePoPool`.
 -   `year` is the maximum year in the observed data (In `testdata`, it
-    is 2017),
+    is 2017).
 -   `title` is the title for the figure.
 -   `y_min` and `y_max` are for setting the range of y-axis.
 -   When there is a variable has three or more levels, an extra argument
@@ -364,7 +364,7 @@ available by using `PoDDyHePoFreqtable`.
 
 There are two arguments in this function,
 
--   the observed data (`testdata`),
+-   the observed data (`testdata`).
 -   and a variable name of interest. Examples are given below.
 
 <!-- -->
