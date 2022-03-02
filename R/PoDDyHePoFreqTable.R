@@ -21,20 +21,20 @@ PoDDyHePoFreqTable <- function(data, colName){
   options(qwraps2_markup = "markdown")
   summary_statistic <- list("Male" =
                               list(
-                                "Total" = ~ sum(!is.na(get("vuosi")[which(sukup == 1)])),
-                                "Missing" = ~ sum(!is.na(get(colName)[which(sukup == 1)])),
+                                "Total" = ~ sum(!is.na(get("year")[which(sukup == 1)])),
+                                "Response" = ~ sum(!is.na(get(colName)[which(sukup == 1)])),
                                 "%" = ~ round(100 * mean(!is.na(get(colName)[which(sukup == 1)])), 1)
                               ),
                             "Female" =
                               list(
-                                "Total" = ~ sum(!is.na(get("vuosi")[which(sukup == 2)])),
-                                "Missing" = ~ sum(!is.na(get(colName)[which(sukup == 2)])),
+                                "Total" = ~ sum(!is.na(get("year")[which(sukup == 2)])),
+                                "Response" = ~ sum(!is.na(get(colName)[which(sukup == 2)])),
                                 "%" = ~ round(100 * mean(!is.na(get(colName)[which(sukup == 2)])), 1)
                               )
   )
 
   print(qwraps2::summary_table(
-    group_by(data, get("vuosi")),
+    group_by(data, get("year")),
     summary_statistic
   ))
 
