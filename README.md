@@ -28,6 +28,8 @@ Before getting started, make sure that you have installed and attached
 the package. Also, remember to load the following package: `splines`.
 
     # Install devtools if you do not have.
+    # install.packages("devtools")
+    library(devtools)
     install_github("zzhhatthl/PoDDyHePo-projection")
     # After installation, please attach both PoDDyHePo-projection and splines.
     library(csprojections)
