@@ -114,7 +114,8 @@ imp is an object of class from in mice package (see Step 1).
 -   DV is the abbreviation of dependent variable.
 -   Arguments NsVar, df, knots, b.knots are for customizing ns function
     in the model.
-    -   NsVar specifies a variable with a natural spline, if it is NULL,
+    -   NsVar specifies variables with natural spline (two or more
+        variables supported), if it is NULL,
     -   degrees of freedom(df),
     -   breakpoints that define the spline (knots) and boundary points
         (b.knots) are ignored; if it is not NULL, we can set df or knots
@@ -156,14 +157,65 @@ projection.
                                           size = 10000, 
                                           y2pred = c(2021, 2025, 2030, 2035, 2040))
 
-For the function `PoDDyHePoPopulationDF`, the first argument is the
-well-formatted data, in the example `testdata`. The second argument,
-which is “file”, is a csv file downloaded from Statistics Finland (with
-special requirements given below). The third is a sample size and the
-fourth is the years to be projected. Above, 2021, 2025, 2030, 2035 and
-2040, are the years to be projected, so
-`y2pred = c(2021, 2025, 2030, 2035, 2040)`. If you want to try our
-interrnal population forecasts, use
+Basic information (sturcture, data types and summary) of testdata2040
+are given below.
+
+    # head(testdata2040) returns first 6 rows of testdata2040.
+    # > head(testdata2040)
+    #   year sex age  obe  smo highbp edulv marsta area  dbt  sed highkol
+    # 1 1997   2  63    2    0      1     1      0    3    0    0       0
+    # 2 2007   1  30 <NA> <NA>   <NA>  <NA>   <NA>    6 <NA> <NA>    <NA>
+    # 3 2007   2  50    1    0      0     2      1    2    0    0       1
+    # 4 2007   2  54    1    0      1     2      1    6 <NA>    1       1
+    # 5 2007   2  46    2    0      0     2      1    2    0    0       0
+    # 6 2002   2  29 <NA> <NA>   <NA>  <NA>   <NA>    4 <NA> <NA>    <NA>
+
+
+    # str(testdata2040) shows the structure of testdata2040.
+    # > str(testdata2040)
+    # 'data.frame': 89172 obs. of  12 variables:
+    #  $ year   : num  1997 2007 2007 2007 2007 ...
+    #  $ sex    : chr  "2" "1" "2" "2" ...
+    #  $ age    : num  63 30 50 54 46 29 30 56 46 33 ...
+    #  $ obe    : Factor w/ 3 levels "0","1","2": 3 NA 2 2 3 NA 2 3 2 NA ...
+    #  $ smo    : Factor w/ 2 levels "0","1": 1 NA 1 1 1 NA 2 1 2 2 ...
+    #  $ highbp : Factor w/ 2 levels "0","1": 2 NA 1 2 1 NA 2 2 1 NA ...
+    #  $ edulv  : Factor w/ 3 levels "1","2","3": 1 NA 2 2 2 NA 1 3 3 1 ...
+    #  $ marsta : Factor w/ 2 levels "0","1": 1 NA 2 2 2 NA 1 2 2 2 ...
+    #  $ area   : Factor w/ 5 levels "2","3","4","5",..: 2 5 1 5 1 3 4 3 3 2 ...
+    #  $ dbt    : Factor w/ 2 levels "0","1": 1 NA 1 NA 1 NA 1 1 1 1 ...
+    #  $ sed    : Factor w/ 2 levels "0","1": 1 NA 1 2 1 NA 1 1 2 1 ...
+    #  $ highkol: Factor w/ 2 levels "0","1": 1 NA 2 2 1 NA 1 2 2 1 ...
+
+
+    # summeries testdata2040
+    # > summary(testdata2040)
+    #       year          sex                 age          obe          smo         highbp       edulv        marsta     
+    #  Min.   :1997   Length:89172       Min.   :25.00   0   :10040   0   :19626   0   :14838   1   : 8632   0   : 6974  
+    #  1st Qu.:2007   Class :character   1st Qu.:34.00   1   : 9434   1   : 6457   1   :10007   2   : 8495   1   :19198  
+    #  Median :2020   Mode  :character   Median :44.00   2   : 5152   NA's:63089   NA's:64327   3   : 8843   NA's:63000  
+    #  Mean   :2019                      Mean   :44.43   NA's:64546                             NA's:63202               
+    #  3rd Qu.:2030                      3rd Qu.:54.00                                                                   
+    #  Max.   :2040                      Max.   :64.00                                                                   
+    #    area         dbt          sed        highkol     
+    #  2   : 7506   0   :23698   0   :20171   0   : 9870  
+    #  3   : 7616   1   :  738   1   : 5850   1   :16254  
+    #  4   : 7838   NA's:64736   NA's:63151   NA's:63048  
+    #  5   : 8381                                         
+    #  6   : 7835                                         
+    #  NA's:49996                                           
+
+In the function `PoDDyHePoPopulationDF`,
+
+-   `data` is the well-formatted data, in the example `testdata`.
+-   `file`, is a csv file downloaded from Statistics Finland (with
+    special requirements given below).
+-   `size` is a sample size.
+-   and `y2pred` is the years to be projected. Above, 2021, 2025, 2030,
+    2035 and 2040, are the years to be projected, so
+    `y2pred = c(2021, 2025, 2030, 2035, 2040)`.
+
+If you want to try our interrnal population forecasts, use
 `file = system.file("extdata", "003_128v_2040_20210730-015759.csv", package = "csprojections")`.
 
 In order to make this function work, the population forecast data has to
@@ -252,18 +304,21 @@ will help you create a data frame ready for prediction.
                                                  marsta$`Suggested Model`,
                                                  area$`Suggested Model`)
 
-In the `PoDDyHePoProjection` function, the first argument is the data
-set from *Step 3*. The second argument is the number of multiple
-imputations, by default this is 5, but much greater value is usually
-needed in practice. The third argument `maxit` is a scalar giving the
-number of iterations. If the fourth argument `printFlag` is `FALSE`,
-`mice` will not print history on console. The last part is for the
-formulas of the imputation models. In *Step 2*, we found models for
-variables with missingness, and they have been saved in the
-`Suggested Model` in the list given by `PoDDyHePoModelSelection`. So, it
-can be used in a way like `obe`: obe$\`Suggested Model\`, or specified
-our own model like for `smo` in the code above. Every variable with
-missingness has to be given a formula.
+In the `PoDDyHePoProjection` function,
+
+-   `data`, the first argument, is the data set from *Step 3*.
+-   Second argument, `m`, is the number of multiple imputations, by
+    default this is 5, but much greater value is usually needed in
+    practice.
+-   `maxit` is a scalar giving the number of iterations.
+-   `printFlag` is `FALSE`, `mice` will not print history on console.
+-   The last part is for the formulas of the imputation models. In *Step
+    2*, we found models for variables with missingness, and they have
+    been saved in the `Suggested Model` in the list given by
+    `PoDDyHePoModelSelection`. So, it can be used in a way like `obe`:
+    obe$\`Suggested Model\`, or specified our own model like for `smo`
+    in the code above. Every variable with missingness has to be given a
+    formula.
 
 **Step 5**: Pool the results from the projection step and plot the
 prevalences. Given Current smoking and body weight
@@ -276,38 +331,44 @@ prevalences. Given Current smoking and body weight
     obepool <- PoDDyHePoPool(projection_with_knots, "obe", sep_col = "obe")
     PoDDyHePoPlot(obepool, year = 2017, title = "BMI categories", y_min = 0, y_max = 75, sepvarlbl = c("Normal Weight", "Overweight", "Obesity"))
 
-In the function `PoDDyHePoPool`, the first argument is the data with
-projected values from *Step 4*, and the second argument is the main
-variable whose prevalences we aim to estimate. The third argument is a
-categorical variable with three or more levels, like in the testdata,
-`obe` has three levels: 0 = Normal Weight, 1 = Overweight, 2 = Obesity.
-By specifying `sep_col = "obe"`, the function calculates the proportions
-of each category. It has to be specified in `sep_col`, when there is a
-variable with 3 or more levels like `obe` in the example, as we use
-Wilson Confidence Interval in the pooling step, which is for binomial
-proportions.
+In the function `PoDDyHePoPool`,
 
-The function `PoDDyHePoPool` returns the prevalences in numerical form.
-It gives you a table with year, prevalences and prediction intervals.
+-   the first argument, `imp`, is the imputed data set from *Step 4*,
+-   `colName` is the main variable whose prevalences we aim to estimate.
+-   `sep_col` is a categorical variable with three or more levels, like
+    in the testdata, `obe` has three levels: 0 = Normal Weight, 1 =
+    Overweight, 2 = Obesity. By specifying `sep_col = "obe"`, the
+    function calculates the proportions of each category. It has to be
+    specified in `sep_col`, when there is a variable with 3 or more
+    levels like `obe` in the example, as we use Wilson Confidence
+    Interval in the pooling step, which is for binomial proportions.
+    This function returns the prevalences in numerical form. It gives
+    you a table with year, prevalences and prediction intervals.
 
-In the function `PoDDyHePoPlot`, the first argument is the result from
-`PoDDyHePoPool`; the second argument is the maximum year in the observed
-data (In `testdata`, it is 2017), the third argument is the title for
-the figure. Arguments `y_min`, `y_max` are for setting the range of
-y-axis. When there is a variable has three or more levels, an extra
-argument `sepvarlbl` is available, which is to label the levels of this
-variable. Otherwise, the labels for the newly created variables will be
-`obe_0`, `obe_1` and `obe_2`.
+In the function `PoDDyHePoPlot`,
+
+-   argurement `data` is the result from `PoDDyHePoPool`;
+-   `year` is the maximum year in the observed data (In `testdata`, it
+    is 2017),
+-   `title` is the title for the figure.
+-   Arguments `y_min`, `y_max` are for setting the range of y-axis.
+-   When there is a variable has three or more levels, an extra argument
+    `sepvarlbl` is available, which is to label the levels of this
+    variable. Otherwise, the labels for the newly created variables will
+    be `obe_0`, `obe_1` and `obe_2`.
 
 NB: Due the limitation of point type, `PoDDyHePoPlot` function does not
 support variable with more than five levels.
 
-Descriptive table with sample size and amount of missingness is also
+Descriptive table with sample size and amount of respondents is also
 available by using `PoDDyHePoFreqtable`.
 
-There are two arguments in this function, the first one is the observed
-data (`testdata`) while the second argument is a variable name of
-interest. Examples are given below.
+There are two arguments in this function,
+
+-   the observed data (`testdata`),
+-   and a variable name of interest. Examples are given below.
+
+<!-- -->
 
     PoDDyHePoFreqTable(testdata, colName = "smo")
     PoDDyHePoFreqTable(testdata, colName = "obe")
