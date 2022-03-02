@@ -350,7 +350,7 @@ In the function `PoDDyHePoPlot`,
 -   `year` is the maximum year in the observed data (In `testdata`, it
     is 2017),
 -   `title` is the title for the figure.
--   Arguments `y_min`, `y_max` are for setting the range of y-axis.
+-   `y_min` and `y_max` are for setting the range of y-axis.
 -   When there is a variable has three or more levels, an extra argument
     `sepvarlbl` is available, which is to label the levels of this
     variable. Otherwise, the labels for the newly created variables will
