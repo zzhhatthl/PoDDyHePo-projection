@@ -9,6 +9,6 @@ authors:
     given-names: Tommi
   - family-names: Tolonen
     given-names: Hanna
-title: zzhhatthl/PoDDyHePo-projection: Projection for PoDDy-HePo Project Using Multiple Imputation
-version: PoDDy-HePo
+title: Projection for PoDDy-HePo Project Using Multiple Imputation
+version: 1.0.0
 date-released: 2022-03-07
