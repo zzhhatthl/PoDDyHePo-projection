@@ -1,0 +1,8 @@
+cff-version: 1.0.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: Zhou
+    given-names: Zhi
+title: zzhhatthl/PoDDyHePo-projection: PoDDy-HePo Projection
+version: PoDDy-HePo
+date-released: 2022-03-07
