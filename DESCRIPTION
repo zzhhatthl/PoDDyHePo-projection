@@ -1,10 +1,10 @@
 Package: csprojections
 Type: Package
 Title: Projection Method for PoDDy-HePo Project
-Version: 0.1.0
+Version: 1.0.0
 Authors@R: 
     c(person("Zhi", "Zhou", email = "zhi.zhou@thl.fi", role = c("cre", "aut")),
-      person("Jaakko", "Reinikanen", role = "aut"),
+      person("Jaakko", "Reinikainen", role = "aut"),
       person("Tommi", "Härkänen", role = "aut"),
       person("Hanna", "Tolonen", role = "aut"),
       person("et al", role = "ctb"))

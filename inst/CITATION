@@ -17,7 +17,7 @@ citEntry(
   textVersion = 
   paste0(
   "Zhou Z, Reinikanen J, Härkänen T, Tolonen H, et al",
-                "Deepayan Sarkar and the R Core Team (",
+                "Department of Public Health and Welfare, Finnish Institute for Health and Welfare (THL) (",
                 year,
                 "). csprojections: PoDDy-HePo Projections Using Multiple Imputation. ",
                 note, ".")
