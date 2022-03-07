@@ -1,11 +1,24 @@
 citHeader("To cite csprojections in publications use:")
 
+year <- sub("-.*", "", meta$Date)
+note <- sprintf("R package version %s", meta$Version)
+
 citEntry(
-  entry    = "Manual",
+  entry    = "Article",
   title    = "{csprojections}: PoDDy-HePo Projections Using Multiple Imputation",
   author   = c(person("Zhi", "Zhou"),
                person("Jaakko", "Reinikanen"),
                person("Tommi", "Härkänen"),
-               person("Hanna", "Tolonen")),
+               person("Hanna", "Tolonen")
+               person("et al")),
+  year     = year,
+  note     = note,
   url      = "https://zenodo.org/badge/latestdoi/431036940",
+  textVersion = 
+  paste0(
+  "Zhou Z, Reinikanen J, Härkänen T, Tolonen H, et al",
+                "Deepayan Sarkar and the R Core Team (",
+                year,
+                "). csprojections: PoDDy-HePo Projections Using Multiple Imputation. ",
+                note, ".")
 )
