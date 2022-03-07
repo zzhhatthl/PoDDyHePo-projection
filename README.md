@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6335014.svg)](https://doi.org/10.5281/zenodo.6335014)
-=======
-
->>>>>>> bacbb929f387d438a0404db965f08a12f468f1b6
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6335144.svg)](https://doi.org/10.5281/zenodo.6335144)
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
