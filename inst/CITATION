@@ -1,0 +1,11 @@
+citHeader("To cite csprojections in publications use:")
+
+citEntry(
+  entry    = "Manual",
+  title    = "{csprojections}: PoDDy-HePo Projections Using Multiple Imputation",
+  author   = c(person("Zhi", "Zhou"),
+               person("Jaakko", "Reinikanen"),
+               person("Tommi", "Härkänen"),
+               person("Hanna", "Tolonen")),
+  url      = "https://zenodo.org/badge/latestdoi/431036940",
+)
