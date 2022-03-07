@@ -4,7 +4,7 @@ output: md_document
 title: "Introduction to PoDDyHePo package"
 
 ---
-[![DOI](https://zenodo.org/badge/431036940.svg)](https://zenodo.org/badge/latestdoi/431036940)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6334868.svg)](https://doi.org/10.5281/zenodo.6334868)
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
