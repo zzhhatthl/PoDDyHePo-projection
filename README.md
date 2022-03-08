@@ -110,24 +110,38 @@ NULL, knots = NULL, b.knots = NULL, f.var = NULL), the first argument
 imp is an object of class from in mice package (see Step 1).
 
 -   DV is the abbreviation of dependent variable.
--   Arguments NsVar, df, knots, b.knots are for customizing ns function
-    in the model.
-    -   NsVar specifies variables with natural spline (two or more
+-   Arguments `NsVar`, `df`, `knots`, `b.knots` are for customizing ns
+    function in the model.
+    -   `NsVar` specifies variables with natural spline (two or more
         variables supported),
-    -   degrees of freedom(df),
-    -   breakpoints that define the spline (knots) and boundary points
-        (b.knots) are ignored; if it is not NULL, we can set df or knots
-        and b.knots. Examples are given as follows based on testdata.
+    -   `df`: degree of freedom,
+    -   `knots`: breakpoint that define the spline,
+    -   `b.knots`: boundary knots.
+
+If NsVar is NULL, `df`, `knots` and `b.knots` ignored; if it is not, we
+can set `df` or `knots` and `b.knots.` Examples are given as follows
+based on testdata.
 
 More details about `ns` function can be found via
 <a href="https://www.rdocumentation.org/packages/splines/versions/3.6.2/topics/ns" class="uri">https://www.rdocumentation.org/packages/splines/versions/3.6.2/topics/ns</a>.
 
+    # With 1 preditor varaible
     smo <- PoDDyHePoModelSelection(imp, 
                                    NsVar = "year", 
                                    DV = "smo", 
                                    knots = 2002, 
-                                   b.knots = c(1997, 2017), 
+                                   b.knots = list(c(1997, 2017)), 
                                    f.var = c("year", "sex", "age", "year:sex"))
+
+    # With 2 predictor variables
+    smo <- PoDDyHePoModelSelection(imp, 
+                                   NsVar = c("year", "age"), 
+                                   DV = "smo", 
+                                   knots = c(2002, 40), 
+                                   b.knots = list(c(1997, 2017), c(25, 64)), 
+                                   f.var = c("year", "sex", "age", "year:sex"))
+
+NB: Please use `list()` when specifying `b.knots`.
 
 For other variables, if other arguments remain the same, what we need to
 do is to change `DV`, like
