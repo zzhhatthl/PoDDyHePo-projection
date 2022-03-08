@@ -52,6 +52,7 @@ In the `testdata`, we have mandatory variables:
  * `year`: Survey year. Numeric. 1997, 2002, 2007, 2012 and 2017. It is not limited and could be any other survey years.
  * `sex`: Categorical. 1 for men and 2 for women. Currently, the function supports only 1 and 2 coding. Please ensure that the coding used for `sex` is correct.
  * `age`: Numeric. Ranges from 25 - 64, but not limited to this range. In your case, it could be any range that you are interested in. 
+ 
 Main variables of interest: 
 
  * `obe`: BMI categories, including obesity, overweight and normal weight. Categorical. 0 = Normal weight, 1 = Overweight and 2 = Obesity.
@@ -77,7 +78,7 @@ When formatting your dataset, the data types of year, sex and age should be nume
 imp <- mice(testdata, m = 5, maxit = 10, printFlag = F)
 ```
 
-NB: `m` and `maxit` can be any number you want, but please consider the computational power of your workstation. Usually, `m = 10` or `m = 20` should be enough. And if `printFlag = T`, `mice` will print history on console. Here, `printFlag = F` is used for silent computation. Data set should be well-formatted like `testdata`, which means there are mandatory variables: year, sex and age named exactly in this way, the main variables of interest whose prevalences are to be estimated, and possibly other background variables. Data from different years are merged into the same data frame.
+NB: `m` and `maxit` can be any number you want, but please consider the computational power of your workstation. Usually, `m = 10` or `m = 20` should be enough. And if `printFlag = T`, `mice` will print history on console. Here, `printFlag = F` is used for silent computation. Data set should be well-formatted like `testdata`, which means there are mandatory variables: year, sex and age named exactly in this way. The main variables of interest whose prevalences are to be estimated, and possibly other background variables. Data from different years are merged into the same data frame.
 
 **Step 2**: Select models with `PoDDyHePoModelSelection`. The user can specify if some variables are allowed to have non-linear effects, which are modelled using natural splines. Some of the variables can also be forced (fixed) to be included in the model. Here in this example, we define knots and boundary knots in the spline function `ns`, and fix variables year, sex, age and an interaction term: year:sex.
 
@@ -85,20 +86,34 @@ In the function PoDDyHePoModelSelection(imp, DV, NsVar = NULL, df = NULL, knots 
 
  * DV is the abbreviation of dependent variable. 
  * Arguments NsVar, df, knots, b.knots are for customizing ns function in the model. 
-    + NsVar specifies variables with natural spline (two or more variables supported), if it is NULL, 
-    + degrees of freedom(df), 
-    + breakpoints that define the spline (knots) and boundary points (b.knots) are ignored; if it is not NULL, we can set df or knots and b.knots. Examples are given as follows based on testdata. 
-    
+    + NsVar specifies variables with natural spline (two or more variables supported), 
+    + df: degree of freedom, 
+    + knots: breakpoint that define the spline,
+    + b.knots: boundary knots.
+
+If NsVar is NULL, df, knots and b.knots ignored; if it is not, we can set df or knots and b.knots. Examples are given as follows based on testdata. 
+
 More details about `ns` function can be found via https://www.rdocumentation.org/packages/splines/versions/3.6.2/topics/ns.
 
 ```{r mode_selection_1, warning=F, error=F, message=F, eval=F}
+# With 1 preditor varaible
 smo <- PoDDyHePoModelSelection(imp, 
                                NsVar = "year", 
                                DV = "smo", 
                                knots = 2002, 
-                               b.knots = c(1997, 2017), 
+                               b.knots = list(c(1997, 2017)), 
+                               f.var = c("year", "sex", "age", "year:sex"))
+
+# With 2 predictor variables
+smo <- PoDDyHePoModelSelection(imp, 
+                               NsVar = c("year", "age"), 
+                               DV = "smo", 
+                               knots = c(2002, 40), 
+                               b.knots = list(c(1997, 2017), c(25, 64)), 
                                f.var = c("year", "sex", "age", "year:sex"))
 ```
+
+NB: Please use `list()` when specifying b.knots.
 
 For other variables, if other arguments remain the same, what we need to do is to change `DV`, like
 

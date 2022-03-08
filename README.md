@@ -46,29 +46,23 @@ In the `testdata`, we have mandatory variables:
 
 -   `year`: Survey year. Numeric. 1997, 2002, 2007, 2012 and 2017. It is
     not limited and could be any other survey years.
-
 -   `sex`: Categorical. 1 for men and 2 for women. Currently, the
     function supports only 1 and 2 coding. Please ensure that the coding
     used for `sex` is correct.
-
 -   `age`: Numeric. Ranges from 25 - 64, but not limited to this range.
-    In your case, it could be any range that you are interested in. Main
-    variables of interest:
+    In your case, it could be any range that you are interested in.
+
+Main variables of interest:
 
 -   `obe`: BMI categories, including obesity, overweight and normal
     weight. Categorical. 0 = Normal weight, 1 = Overweight and 2 =
     Obesity.
-
 -   `smo`: Smoking status. Binary. 0 = Non-smoker, 1 = Smoker.
-
 -   `highbp`: Hypertension. Binary. 0 = Non-hypertensive, 1 =
     Hypertensive.
-
 -   `dbt`: Diabetes. Binary. 0 = Non-diabetic, 1 = Diabetic.
-
 -   `sed`: Sedentary lifestyle. Binary. 0 = Non-sedentary lifestyle, 1 =
     Sedentary lifestyle.
-
 -   `highkol`: Elevated total cholesterol. Binary. 0 = Not high total
     cholesterol, 1 = High total cholesterol.
 
@@ -99,7 +93,7 @@ computational power of your workstation. Usually, `m = 10` or `m = 20`
 should be enough. And if `printFlag = T`, `mice` will print history on
 console. Here, `printFlag = F` is used for silent computation. Data set
 should be well-formatted like `testdata`, which means there are
-mandatory variables: year, sex and age named exactly in this way, the
+mandatory variables: year, sex and age named exactly in this way. The
 main variables of interest whose prevalences are to be estimated, and
 possibly other background variables. Data from different years are
 merged into the same data frame.
@@ -119,7 +113,7 @@ imp is an object of class from in mice package (see Step 1).
 -   Arguments NsVar, df, knots, b.knots are for customizing ns function
     in the model.
     -   NsVar specifies variables with natural spline (two or more
-        variables supported), if it is NULL,
+        variables supported),
     -   degrees of freedom(df),
     -   breakpoints that define the spline (knots) and boundary points
         (b.knots) are ignored; if it is not NULL, we can set df or knots
