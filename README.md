@@ -105,11 +105,10 @@ forced (fixed) to be included in the model. Here in this example, we
 define knots and boundary knots in the spline function `ns`, and fix
 variables year, sex, age and an interaction term: year:sex.
 
-In the function PoDDyHePoModelSelection(imp, DV, NsVar = NULL, df =
-NULL, knots = NULL, b.knots = NULL, f.var = NULL), the first argument
-imp is an object of class from in mice package (see Step 1).
+In the function `PoDDyHePoModelSelection`,
 
--   DV is the abbreviation of dependent variable.
+-   `imp` is an object of class from in mice package (see Step 1).
+-   `DV` is the abbreviation of dependent variable.
 -   Arguments `NsVar`, `df`, `knots`, `b.knots` are for customizing ns
     function in the model.
     -   `NsVar` specifies variables with natural spline (two or more
