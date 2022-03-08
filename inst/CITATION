@@ -10,4 +10,4 @@ bibentry(bibtype = "Manual",
                     person("et al")),
          year = year,
          note = note,
-         url = "https://doi.org/10.5281/zenodo.6334868")
+         url = "https://doi.org/10.5281/zenodo.6335144")
