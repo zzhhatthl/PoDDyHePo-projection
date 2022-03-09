@@ -183,7 +183,7 @@ PoDDyHePoModelSelection <- function(imp, DV, NsVar = NULL, df = NULL, knots = NU
       } else{
         names(info$`Mean BIC`) <- names(info$`Selected Models`) <- c("Non-splines", paste0("ns(", NsVar, 
                                                                                            ",knots=", paste0("c(", knots ,")"), 
-                                                                                           ",Boundary.knots=", b.knots, ")", collapse = "&"))
+                                                                                           ",Boundary.knots=", b.knots, ")", collapse = " & "))
       }
     }
     
