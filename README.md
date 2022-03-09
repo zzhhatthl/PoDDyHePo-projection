@@ -107,7 +107,7 @@ variables year, sex, age and an interaction term: year:sex.
 
 In the function `PoDDyHePoModelSelection`,
 
--   `imp` is an object of class from in mice package (see Step 1).
+-   `imp` is an object of class from `mice` (see Step 1).
 -   `DV` is the abbreviation of dependent variable.
 -   Arguments `NsVar`, `df`, `knots`, `b.knots` are for customizing ns
     function in the model.

@@ -84,7 +84,7 @@ NB: `m` and `maxit` can be any number you want, but please consider the computat
 
 In the function `PoDDyHePoModelSelection`, 
 
- * `imp` is an object of class from in mice package (see Step 1). 
+ * `imp` is an object of class from `mice` (see Step 1). 
  * `DV` is the abbreviation of dependent variable. 
  * Arguments `NsVar`, `df`, `knots`, `b.knots` are for customizing ns function in the model. 
     + `NsVar` specifies variables with natural spline (two or more variables supported), 
