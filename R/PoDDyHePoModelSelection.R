@@ -24,6 +24,7 @@
 #' 
 #' @importFrom magrittr %>% 
 #' @importFrom splines ns
+#' @importFrom stringi stri_replace_all_regex
 #' 
 #' @export
 
@@ -84,8 +85,10 @@ PoDDyHePoModelSelection <- function(imp, DV, NsVar = NULL, df = NULL, knots = NU
         # If NsVar is in the interaction term, replace it and attach to f.var2,
         
         if(grepl(paste0(".*", NsVar, collapse = "|"), f.var[which(!f.var %in% names(imp$data))])){
-          idx <- grep(paste0(".*", NsVar, collapse = "|"), f.var[which(!f.var %in% names(imp$data))])
-          fix.var[i, ] <- append(fixvars, gsub(NsVar[idx], replace[i, idx], f.var[which(!f.var %in% names(imp$data))]))
+          fix.var[i, ] <- append(fixvars, stringi::stri_replace_all_regex(f.var[which(!f.var %in% names(imp$data))], 
+                                                                          NsVar, 
+                                                                          replace[2, ], 
+                                                                          vectorize = F))
         } else{
           fix.var[i, ] <- append(fixvars, f.var[which(!f.var %in% names(imp$data))])
         } 
