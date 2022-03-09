@@ -25,6 +25,7 @@ Imports:
     plyr,
     qwraps2,
     fastDummies,
-    splines
+    splines,
+    stringi
 RoxygenNote: 7.1.2
 
