@@ -16,7 +16,7 @@
 #' @import MIWilson dplyr
 #' @importFrom magrittr %>% 
 
-PoDDyHePoPool <- function(imp, colName, grpVar, sep_col = NULL){
+PoDDyHePoPool <- function(imp, colName, grpVar = "sex", sep_col = NULL){
   
   if(!is.null(sep_col)){
     
