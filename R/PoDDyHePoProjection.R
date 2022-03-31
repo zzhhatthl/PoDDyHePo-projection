@@ -4,7 +4,7 @@
 #'
 #' @description PoDDyHePoProjection is the main body for projection. It projects projects individual-level values of the variables using multiple imputation.
 #' 
-#' @details It allows people to set up a variable whose proportion of each category needs to be calculated and returns a \code{\link[=mids-class]{mids}} obeject.
+#' @details It allows people to set up a variable whose proportion of each category needs to be calculated and returns a \code{\link[=mids-class]{mids}} object.
 #' 
 #' @param data A well-formatted data set ready for projection.
 #' @param m Number of multiple imputations. The default is \code{m=5}.

@@ -7,7 +7,7 @@
 #' @details 
 #'
 #' @param data Well-formatted data. 
-#' @param file Population forcasts from statistic Finland.
+#' @param file Population forecasts from statistic Finland.
 #' @param size Size of sample to be projected
 #' @param y2pred years that need to be projected.
 #'

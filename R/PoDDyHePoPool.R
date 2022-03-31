@@ -98,7 +98,7 @@ PoDDyHePoPool <- function(imp, colName, grpVar = "sex", sep_col = NULL){
       sort() %>%
       rep(2)
     
-    # Create Sex
+    # Create grouping variable
     pool$Grp <- sort(unique(imp.New$data[[grpVar]])) %>%
       rep(times = 1, each = length(unique(imp.New$data$year))) %>% 
       as.factor()
@@ -110,5 +110,4 @@ PoDDyHePoPool <- function(imp, colName, grpVar = "sex", sep_col = NULL){
   }
   
   return(pool)
-  
 }
