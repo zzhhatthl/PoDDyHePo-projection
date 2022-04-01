@@ -74,9 +74,9 @@ Other background variables:
     and Loimaa, 5 = Helsinki and Vantaa, 6 = Northern Ostrobothnia and
     Kainuu.
 
-When formatting your dataset, the data types of year, sex and age should
-be numeric, factor and numeric, respectively. Other binary/categorical
-variables should be factor and continuous numeric.
+When formatting your data set, the data types of year, sex and age
+should be numeric, factor and numeric, respectively. Other
+binary/categorical variables should be factor and continuous numeric.
 
 ## Guidelines for Using the package
 
@@ -111,7 +111,7 @@ In the function `PoDDyHePoModelSelection`,
     -   `NsVar` specifies variables with natural spline (two or more
         variables supported),
     -   `df`: degree of freedom,
-    -   `knots`: breakpoint that define the spline,
+    -   `knots`: breakpoints that define the spline,
     -   `b.knots`: boundary knots.
 
 If NsVar is NULL, `df`, `knots` and `b.knots` ignored; if it is not, we
@@ -363,7 +363,7 @@ In the function `PoDDyHePoPlot`,
     is 2017).
 -   `grplabels`, the labels of grouping variable. By default,
     `grplabels = c("Men", "Women")`, as `sex` is our default setting in
-    “PoDDyHePoPool”.
+    `PoDDyHePoPool`.
 -   `title` is the title for the figure.
 -   `y_min` and `y_max` are for setting the range of y-axis.
 -   When there is a variable has three or more levels, an extra argument
