@@ -4,7 +4,7 @@
 \alias{PoDDyHePoPool}
 \title{Pool Function Developed for PoDDy-HePo project.}
 \usage{
-PoDDyHePoPool(imp, colName, grpVar, sep_col = NULL)
+PoDDyHePoPool(imp, colName, grpVar = "sex", sep_col = NULL)
 }
 \arguments{
 \item{imp}{Complete data (mids object) from PoDDyHePoProjeciton().}

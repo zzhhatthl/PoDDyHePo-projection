@@ -3,7 +3,7 @@
 #' @title Model Selection Function Developed for PoDDy-HePo Project (BIC based)
 #'
 #' @description PoDDyHePoModelSelection returns a list of 4 elements: 
-#'              Models (Recoreds all selected models of each imputed data set), 
+#'              Models (Records all selected models of each imputed data set), 
 #'              Mean BIC (Records Mean BIC of each round of imputation),
 #'              Selected Models (Records a selected model/selected models over imputation of cases)
 #'              Suggested Model (Records a suggested model with smaller BIC value)
