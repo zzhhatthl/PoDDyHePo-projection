@@ -345,7 +345,8 @@ In the function `PoDDyHePoPool`,
 -   `grpVar` is the grouping variable. By default, it is `sex.` The
     grouping variable should not have any missing value, like `year`,
     `sex` and `age`. In order to use `age` as grouping variable, you
-    much change numeric age into predefined age group.
+    must change numeric age into predefined age group. NOTICE: Grouping
+    variable should not have more than five categories.
 -   `sep_col` is a categorical variable with three or more levels, like
     in the testdata, `obe` has three levels: 0 = Normal Weight, 1 =
     Overweight, 2 = Obesity. By specifying `sep_col = "obe"`, the

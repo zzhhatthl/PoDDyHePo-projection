@@ -291,7 +291,7 @@ In the function `PoDDyHePoPool`,
 
  * `imp`, is the imputed data set from *Step 4*.
  * `colName` is the main variable whose prevalences we aim to estimate. 
- * `grpVar` is the grouping variable. By default, it is `sex.` The grouping variable should not have any missing value, like `year`, `sex` and `age`. In order to use `age` as grouping variable, you much change numeric age into predefined age group.
+ * `grpVar` is the grouping variable. By default, it is `sex.` The grouping variable should not have any missing value, like `year`, `sex` and `age`. In order to use `age` as grouping variable, you must change numeric age into predefined age group. NOTICE: Grouping variable should not have more than five categories.
  * `sep_col` is a categorical variable with three or more levels, like in the testdata, `obe` has three levels: 0 = Normal Weight, 1 = Overweight, 2 = Obesity. By specifying `sep_col = "obe"`, the function calculates the proportions of each category. It has to be specified in `sep_col`, when there is a variable with 3 or more levels like `obe` in the example, as we use Wilson Confidence Interval in the pooling step, which is for binomial proportions. This function returns the prevalences in numerical form. It gives you a table with year, prevalences and prediction intervals.
 
 In the function `PoDDyHePoPlot`, 
