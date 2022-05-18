@@ -23,26 +23,27 @@
 PoDDyHePoPopulationDF <- function(data, file, size, y2pred){
   
   # read in data from statistic Finland 
-  population <- utils::read.table(file, sep = ";", skip = 2, header = T, check.names = F, colClasses = c(Area="NULL"))
+  population <- utils::read.table(file, sep = ";", skip = 2, header = T, check.names = F, colClasses = c(Area="NULL")) %>% 
+    subset(get("Age") != "Total")
   
   # Get total amount from the data
   total <- population %>%
     select(grep(".*Total|Age", names(population), value = F)) %>%
-    mutate(Age = suppressWarnings(as.numeric(get("Age")))) %>%
+    mutate(Age = suppressWarnings(as.numeric(as.character(get("Age"))))) %>%
     subset(get("Age") >= range(data$age)[1] & get("Age") <= range(data$age)[2]) %>%
     arrange(get("Age"))
 
   # Get predicted amount for men
   male <- population %>%
     select(grep(".*Males|Age", names(population), value = F)) %>%
-    mutate(Age = suppressWarnings(as.numeric(get("Age")))) %>%
+    mutate(Age = suppressWarnings(as.numeric(as.character(get("Age"))))) %>%
     subset(get("Age") >= range(data$age)[1] & get("Age") <= range(data$age)[2]) %>%
     arrange(get("Age"))
 
   # Get prdicted amount for women
   female <- population %>%
     select(grep(".*Females|Age", names(population), value = F)) %>%
-    mutate(Age = suppressWarnings(as.numeric(get("Age")))) %>%
+    mutate(Age = suppressWarnings(as.numeric(as.character(get("Age"))))) %>%
     subset(get("Age") >= range(data$age)[1] & get("Age") <= range(data$age)[2]) %>%
     arrange(get("Age"))
   
