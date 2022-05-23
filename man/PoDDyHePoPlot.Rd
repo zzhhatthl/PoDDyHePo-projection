@@ -7,7 +7,7 @@
 PoDDyHePoPlot(
   data,
   year,
-  grplabels = c("Men", "Women"),
+  grplabels = NULL,
   title,
   y_min,
   y_max,
@@ -19,7 +19,7 @@ PoDDyHePoPlot(
 
 \item{year}{The maximum year in the observed data.}
 
-\item{grplabels}{The labels of grouping variable. By default, grplabels = c("Men", "Women").}
+\item{grplabels}{The labels of grouping variable. By default, grplabels = NULL.}
 
 \item{title}{The tile of the plot. It changes due to we will have different response variable.}
 

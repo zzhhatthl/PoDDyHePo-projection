@@ -8,7 +8,7 @@
 #'
 #' @param data A data frame from PoDDyHePoPool.
 #' @param year The maximum year in the observed data.
-#' @param grplabels The labels of grouping variable. By default, grplabels = c("Men", "Women").
+#' @param grplabels The labels of grouping variable. By default, grplabels = NULL.
 #' @param title The tile of the plot. It changes due to we will have different response variable.
 #' @param y_min minimum value of y-axis(in percentage). For example, if 10 percent is the minimum value of y-axis, then type let y_min = 10.
 #' @param y_max maximum value of y-axis(in percentage). Let y_max = 75, if 75 percent is the maximum value of y-axis.
