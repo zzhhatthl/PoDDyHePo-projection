@@ -2,7 +2,8 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# Introduction
+Introduction
+============
 
 The purpose of this package is to project prevalences of health
 indicators in future. The method uses data on cross-sectional surveys
@@ -22,7 +23,8 @@ population structure. This package contains the following functions:
     `PoDDyHePoProjection`.
 6.  `PoDDyHePoPlot`: plots the prevalences against survey year.
 
-# Getting stated
+Getting stated
+==============
 
 Before getting started, make sure that you have installed and attached
 the package. Also, remember to load the following package: `splines`.
@@ -78,7 +80,8 @@ When formatting your data set, the data types of year, sex and age
 should be numeric, factor and numeric, respectively. Other
 binary/categorical variables should be factor and continuous numeric.
 
-## Guidelines for Using the package
+Guidelines for Using the package
+--------------------------------
 
 **Step 1**: If data from past surveys include missing values, they are
 imputed before selecting models for projection.
@@ -119,7 +122,7 @@ can set `df` or `knots` and `b.knots.` Examples are given as follows
 based on testdata.
 
 More details about `ns` function can be found via
-<https://www.rdocumentation.org/packages/splines/versions/3.6.2/topics/ns>.
+<a href="https://www.rdocumentation.org/packages/splines/versions/3.6.2/topics/ns" class="uri">https://www.rdocumentation.org/packages/splines/versions/3.6.2/topics/ns</a>.
 
     # With 1 preditor varaible
     smo <- PoDDyHePoModelSelection(imp, 
@@ -231,7 +234,7 @@ be in a specific form. In case of Finland, data can be downloaded in the
 correct form by following the next steps:
 
 1.  Visit
-    <https://pxnet2.stat.fi/PXWeb/pxweb/en/StatFin/StatFin__vrm__vaenn/>,
+    <a href="https://pxnet2.stat.fi/PXWeb/pxweb/en/StatFin/StatFin__vrm__vaenn/" class="uri">https://pxnet2.stat.fi/PXWeb/pxweb/en/StatFin/StatFin__vrm__vaenn/</a>,
     scroll down and find Population projection.
 2.  Click 139f – Population projection 2021: Population according to age
     and sex by area, 2021-2040 \[Size: 5818 Kb\] \[Modified:
@@ -331,11 +334,11 @@ In the `PoDDyHePoProjection` function,
 prevalences. Given Current smoking and body weight
 
     # Current smoking
-    smopool <- PoDDyHePoPool(projection_with_knots, colName = "smo", sep_col = NULL)
+    smopool <- PoDDyHePoPool(projection_with_knots, colName = "smo", grpVar = NULL)
     PoDDyHePoPlot(smopool, year = 2017, grplabels = c("Men", "Women"), title = "Current smoking", y_min = 0, y_max = 40)
 
     # BMI categories
-    obepool <- PoDDyHePoPool(projection_with_knots, colName = "obe", grpVar ="sex", sep_col = "obe")
+    obepool <- PoDDyHePoPool(projection_with_knots, colName = "obe", grpVar = "sex")
     PoDDyHePoPlot(obepool, year = 2017, grplabels = c("Men", "Women"), title = "BMI categories", y_min = 0, y_max = 75, sepvarlbl = c("Normal Weight", "Overweight", "Obesity"))
 
 In the function `PoDDyHePoPool`,
@@ -347,15 +350,18 @@ In the function `PoDDyHePoPool`,
     `sex` and `age`. In order to use `age` as grouping variable, you
     must change numeric age into predefined age group. NOTICE: Grouping
     variable should not have more than five categories.
--   `sep_col` is a categorical variable with three or more levels, like
-    in the testdata, `obe` has three levels: 0 = Normal Weight, 1 =
-    Overweight, 2 = Obesity. By specifying `sep_col = "obe"`, the
-    function calculates the proportions of each category. It has to be
-    specified in `sep_col`, when there is a variable with 3 or more
-    levels like `obe` in the example, as we use Wilson Confidence
-    Interval in the pooling step, which is for binomial proportions.
-    This function returns the prevalences in numerical form. It gives
-    you a table with year, prevalences and prediction intervals.
+-   Though `sep_col` is not in the arguement, it is important. It is a
+    categorical variable with three or more levels, like in the
+    testdata, `obe` has three levels: 0 = Normal Weight, 1 = Overweight,
+    2 = Obesity. By specifying `colName`, the programme will check if it
+    has three or more levels, then the function calculates the
+    proportions of each category. When there is a variable with three or
+    more levels like `obe` in the example, the self-detected `sep_col`
+    helps us to adapt it to use Wilson Confidence Interval in the
+    pooling step, which is for binomial proportions.
+
+This function returns the prevalences in numerical form. It gives you a
+table with year, prevalences and prediction intervals.
 
 In the function `PoDDyHePoPlot`,
 
@@ -363,8 +369,8 @@ In the function `PoDDyHePoPlot`,
 -   `year` is the maximum year in the observed data (In `testdata`, it
     is 2017).
 -   `grplabels`, the labels of grouping variable. By default,
-    `grplabels = c("Men", "Women")`, as `sex` is our default setting in
-    `PoDDyHePoPool`.
+    `grplabels = NULL`. As we used `sex` as grouping variable, our
+    setting is `grplables = c("Men", "Women")`.
 -   `title` is the title for the figure.
 -   `y_min` and `y_max` are for setting the range of y-axis.
 -   When there is a variable has three or more levels, an extra argument
@@ -391,7 +397,8 @@ There are two arguments in this function,
 Notice: The function creates a table for only one variable. Does not
 support several variables at one time.
 
-# Acknowledgement
+Acknowledgement
+===============
 
 This R code has been developed in the framework of the Projections of
 the burden of disease and disability in Finland - health policy
