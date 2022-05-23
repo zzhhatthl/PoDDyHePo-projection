@@ -1,4 +1,4 @@
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6335144.svg)](https://doi.org/10.5281/zenodo.6335144)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6333982.svg)](https://doi.org/10.5281/zenodo.6333982)
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
