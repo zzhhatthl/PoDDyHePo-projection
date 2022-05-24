@@ -11,7 +11,7 @@ PoDDyHePoPool(imp, colName, grpVar = NULL)
 
 \item{colName}{A variable whose prevalences are to be estimated.}
 
-\item{grpVar}{Grouping variable. In our case, "sex" used as grouping variable, that is grpVar = "sex".}
+\item{grpVar}{Grouping variable. The default is NULL. In our case, "sex" used as grouping variable, that is grpVar = "sex".}
 }
 \value{
 Returns a data frame ready for plotting.

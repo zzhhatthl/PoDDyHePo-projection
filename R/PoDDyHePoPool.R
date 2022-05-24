@@ -7,7 +7,7 @@
 #'
 #' @param imp Complete data (mids object) from PoDDyHePoProjeciton(). 
 #' @param colName A variable whose prevalences are to be estimated.
-#' @param grpVar Grouping variable. In our case, "sex" used as grouping variable, that is grpVar = "sex".
+#' @param grpVar Grouping variable. The default is NULL. In our case, "sex" used as grouping variable, that is grpVar = "sex".
 #'
 #' @return Returns a data frame ready for plotting.
 #' @export
