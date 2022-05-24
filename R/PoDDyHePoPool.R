@@ -22,14 +22,14 @@ PoDDyHePoPool <- function(imp, colName, grpVar = NULL){
   # If it is not and not even numeric, make it numeric. 
   if(max(as.numeric(imp.long[[colName]]) - 1, na.rm = T) > 1){
     sep_col <- colName
-    cat("NOTICE: Set sep_col = colName, as colName != sep_col, and colName is the variable whose proportion is to be calculated. \n Programme continue... \n")
+    cat("NOTICE: Set sep_col = colName, as colName is the variable has three or more levels. \n Programme continue... \n")
     imp.long <- imp.long %>% 
       fastDummies::dummy_cols(select_columns = sep_col, ignore_na = T)
     colNames <- names(imp.long[, grep(paste0(".*", colName, "_"), names(imp.long))])
   } else if(!is.numeric(imp.long[[colName]])){
     imp.long[[colName]] <- as.numeric(imp.long[[colName]]) - 1
     sep_col <- NULL
-    cat("NOTICE: Set sep_col = NULL, as colName != sep_col, and colName is not the variable whose proportion is to be calculated. \n Programme continue... \n")
+    cat("NOTICE: Set sep_col = NULL, as colName is not the variable has three or more levels. \n Programme continue... \n")
   }
   
   # Transform back to mids
