@@ -1,14 +1,14 @@
 #' Description of PoDDyHePoPopulationDF()
 #' 
-#' @title Population Forecasts Function Developed for PoDDy-HePo Project
+#' @title Function Developed to Join Population Forecats and Units Needs To Be Projected for PoDDy-HePo Project
 #'
-#' @description PoDDyHePoPopulationDF returns a data frame with data needs to be projected.
+#' @description PoDDyHePoPopulationDF returns a data frame with units need to be projected.
 #'
 #' @details 
 #'
 #' @param data Well-formatted data. 
 #' @param file Population forecasts from statistic Finland. If you are not using population forecasts from statistics Finland, follow the guidelines to create one.
-#' @param size Size of samples to be projected
+#' @param size Size of samples to be projected.
 #' @param y2pred years that need to be projected.
 #'
 #'

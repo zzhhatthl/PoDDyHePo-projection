@@ -12,6 +12,7 @@
 #' @return Returns a data frame ready for plotting.
 #' @export
 #' @import MIWilson dplyr
+#' @importFrom fastDummies dummy_cols
 #' @importFrom magrittr %>% 
 
 PoDDyHePoPool <- function(imp, colName, grpVar = NULL){
@@ -19,30 +20,26 @@ PoDDyHePoPool <- function(imp, colName, grpVar = NULL){
   imp.long <- complete(imp, action = "long", include = T) 
   
   # Detect proportional variables, if it is, save column names
-  # If it is not and not even numeric, make it numeric. 
+  #  and calculate the proportions.
+  # If it is not and not even numeric, make it numerical. 
   if(max(as.numeric(imp.long[[colName]]) - 1, na.rm = T) > 1){
     sep_col <- colName
-    cat("NOTICE: Set sep_col = colName, as colName is the variable has three or more levels. \n Programme continue... \n")
     imp.long <- imp.long %>% 
       fastDummies::dummy_cols(select_columns = sep_col, ignore_na = T)
     colNames <- names(imp.long[, grep(paste0(".*", colName, "_"), names(imp.long))])
   } else if(!is.numeric(imp.long[[colName]])){
     imp.long[[colName]] <- as.numeric(imp.long[[colName]]) - 1
     sep_col <- NULL
-    cat("NOTICE: Set sep_col = NULL, as colName is not the variable has three or more levels. \n Programme continue... \n")
   }
   
   # Transform back to mids
   imp.New <- as.mids(imp.long)
-  
-  # If colName != sep_col, correct-
   
   # Create data frame, ready to collect the results
   pool <- data.frame()
   
   # Compute mean and standard error in each imputed dataset
   if(is.null(grpVar) & !is.null(sep_col)){
-    
     # Compute mean and standard error in each imputed dataset
     for (k in colNames) {
       for (v in sort(unique(imp.New$data$year))) {
