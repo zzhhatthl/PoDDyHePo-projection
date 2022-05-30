@@ -2,7 +2,7 @@
 #' 
 #' @title Frequency table Function Developed for PoDDy-Hepo Project
 #'
-#' @description It returns a table arranged by Year.
+#' @description It returns a table arranged by Year and Sex.
 #'
 #' @details The table includes total, respondents (N) and its proportion (%).
 #'
