@@ -149,10 +149,10 @@ PoDDyHePoModelSelection <- function(imp, DV, NsVar = NULL, df = NULL, knots = NU
     ## Compute Mean BIC
     BIC[[i]] <- fit[[i]]$analyses %>% sapply(BIC) %>% mean()
     
-    ## Index of the minimun Mean BIC
+    ## Index of the minimum Mean BIC
     idx <- which.min(BIC)
     
-    ## Selected moldes from each imputed data set
+    ## Selected models from each imputed data set
     selectedModels[[i]] <- fit[[i]]$analyses[[fit[[i]] $analyses %>% sapply(BIC) %>% which.min()]]$formula
     
     ## Suggested model
