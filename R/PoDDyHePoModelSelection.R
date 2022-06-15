@@ -81,7 +81,7 @@ PoDDyHePoModelSelection <- function(imp, DV, NsVar = NULL, df = NULL, knots = NU
       if(is.null(f.var)){
         fix.var[i, ] <- NA
       } else{
-        fixvars <- Ns[[i]][which(f.var %in% names(imp$data))]
+        fixvars <- Ns[[i]][which(names(imp$data) %in% f.var)]
         # If NsVar is in the interaction term, replace it and attach to f.var2,
         
         if(grepl(paste0(".*", NsVar, collapse = "|"), f.var[which(!f.var %in% names(imp$data))])){
@@ -101,8 +101,10 @@ PoDDyHePoModelSelection <- function(imp, DV, NsVar = NULL, df = NULL, knots = NU
     
     Ns[[1]] <- names(imp$data)
     if(is.null(f.var)){
+      fix.var <- data.frame()
       fix.var[1, ] <- list(NULL) 
     } else{
+      fix.var <- data.frame(matrix(NA, 1, length(f.var)))
       fix.var[1, ] <- f.var
     }
   }
